@@ -10,6 +10,14 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 input;
 
+    private Animator animator;
+
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+    
 
     private void Update()
     {
@@ -17,10 +25,17 @@ public class PlayerController : MonoBehaviour
         {
             input.x = Input.GetAxisRaw("Horizontal");
             input.y = Input.GetAxisRaw("Vertical");
+            
+
 
             //if input is different than 0 then run something
+            //We can remove diagonal movement its done at end of tutorial if we need to remove it.
             if (input != Vector2.zero)
             {
+
+                animator.SetFloat("moveX", input.x);
+                animator.SetFloat("moveY", input.y);
+
                 //inside this variable stored the position of the player
                 var targetPos = transform.position;
                 targetPos.x += input.x / 6;
