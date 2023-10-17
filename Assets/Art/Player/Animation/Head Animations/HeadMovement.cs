@@ -37,10 +37,12 @@ public class HeadFollowMouse : MonoBehaviour
     private Vector3 originalPosition;
     private Vector3 originalLocalPosition;  // Variable to store the original local position
     private Vector3 lastMousePosition;
+    private Vector3 previousScale;
     Vector3 lastPosition;
     void Start()
     {
-    
+        
+        previousScale = transform.localScale;
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalLocalPosition = transform.localPosition;  // Store the original local position
         lastMousePosition = Input.mousePosition;
@@ -50,18 +52,29 @@ public class HeadFollowMouse : MonoBehaviour
     {
 
         Animator parentAnimator = transform.parent.GetComponent<Animator>();
-        ;
+      
         Vector3 mousePos = Input.mousePosition;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
         Vector3 currentPosition = transform.position;
         AnimatorClipInfo[] clipInfo = parentAnimator.GetCurrentAnimatorClipInfo(0);
         string clipName = "";
+       
+
+        //this if statment prevents animation flashing from happening when the mouse is not moving but the mouse position is 
+        //changing because of unity float variation i.e. mouse pos switching between 79.2 and 80.1 therefore animation flashing
+        if (Vector3.Distance(lastMousePosition, mousePos) > 0.1f);
+        //do nothing
+        else 
+            return;
+      
+
         if (clipInfo.Length > 0)
         {
             AnimationClip currentClip = clipInfo[0].clip;
             clipName = currentClip.name;
             //Debug.Log("Current clip name: " + clipName);
         }
+
        // if (mousePos != lastMousePosition || lastPosition != currentPosition)
        //  {
             if (clipName.Equals("IdleDown") || clipName.Equals("WalkDown"))
@@ -77,46 +90,37 @@ public class HeadFollowMouse : MonoBehaviour
 
                 // Reset the local position back to the original local position
                 transform.localPosition = originalLocalPosition;
+                transform.localScale = previousScale;
                // Debug.Log(angle + "ClipName Inside Walkdown Check" + clipName);
                 if (angle > -22.5f && angle <= 22.5f)
                 {
                     spriteRenderer.sprite = right;
-                    // Adjust the y-coordinate relative to the parent:
-                    //transform.localPosition = new Vector3(transform.localPosition.x + 0.05f, transform.localPosition.y + 0.05f, transform.localPosition.z);
                     transform.position = new Vector3(transform.position.x, transform.position.y - 0.03f, transform.position.z);
                 }
-                 else if (angle < -5 && angle >= -75f)
-                 {
-                spriteRenderer.sprite = diagonalRight;
-                transform.position = new Vector3(transform.position.x + 0.06f, transform.position.y + 0.04f, transform.position.z);
-                 }
+                else if (angle < -5 && angle >= -75f)
+                {
+                    spriteRenderer.sprite = diagonalRight;
+                    transform.position = new Vector3(transform.position.x + 0.06f, transform.position.y + 0.04f, transform.position.z);
+                }
                  else if (angle > -112.5f && angle <= -67.5f)
                  {
                     spriteRenderer.sprite = down;
-                    //transform.position = new Vector3(transform.position.x, transform.position.y - 0.3f, transform.position.z);
                  }
                 else if (angle <= -112.5f && angle > -165f)
                 {
-                    Debug.Log("entering diagonal left");
                     spriteRenderer.sprite = diagonalLeft;
                     transform.position = new Vector3(transform.position.x + 0.08f, transform.position.y + 0.067f, transform.position.z);
                 }
-           
-             
                 else if ((angle >= 165 || angle <= -150.5f) || angle > 160)
                 {
-                    Debug.Log("entering left");
+                  
                     spriteRenderer.sprite = left;
-                    //transform.position = new Vector3(transform.position.x, transform.position.y + 0.05f, transform.position.z);
                 }
-            
                 //both of these are for when the mouse is behind the character
                 else if (angle > 22f && angle <= 90f)
                 {
-
                     spriteRenderer.sprite = right;
-            
-                 }
+                }
                 else if (angle > 90 && angle < 165f)
                 {
                     spriteRenderer.sprite = left;
@@ -129,6 +133,9 @@ public class HeadFollowMouse : MonoBehaviour
                 {
                     spriteRenderer.sprite = down;
                 }
+
+            
+            
         }
             if (clipName.Equals("IdleUp") || clipName.Equals("WalkUp"))
             {
@@ -142,8 +149,8 @@ public class HeadFollowMouse : MonoBehaviour
                 Debug.Log(angle + "ClipName Inside Idle Up" + clipName);
                 // Reset the local position back to the original local position
                 transform.localPosition = originalLocalPosition;
-
-                //if statments are head moving from left to right
+                transform.localScale = previousScale;
+                 //if statments are head moving from left to right
                 if (angle > 157.5f || angle <= -157.5f)
                 {
                     spriteRenderer.sprite = left1;
@@ -198,12 +205,13 @@ public class HeadFollowMouse : MonoBehaviour
 
                 // Reset the local position back to the original local position
                 transform.localPosition = originalLocalPosition;
-
+                transform.localScale = previousScale;
                 //look up
                 if (angle > 90f && angle <= 115f)
                 {
                     spriteRenderer.sprite = Up2;
-                    transform.position = new Vector3(transform.position.x, transform.position.y - 0.05f, transform.position.z);
+                    transform.position = new Vector3(transform.position.x - 0.045f, transform.position.y - 0.065f, transform.position.z);
+                    transform.localScale = new Vector3(0.78f, 1.0f, 1.0f);
                 }
                 else if (angle > 115f && angle <= 162f)
                 {
@@ -220,23 +228,25 @@ public class HeadFollowMouse : MonoBehaviour
                 else if (angle > -115f && angle <= -90f)
                 {
                     spriteRenderer.sprite = down2;
-                    transform.position = new Vector3(transform.position.x + 0.03f, transform.position.y - 0.05f, transform.position.z);
+                    transform.position = new Vector3(transform.position.x + 0.015f, transform.position.y - 0.05f, transform.position.z);
                 }
                
                 //when mouse behind character
                 else if(angle >90 || angle >= 0f)
                 {
-
                     spriteRenderer.sprite = Up2;
-                //transform.position = new Vector3(transform.position.x + 0.03f, transform.position.y - 0.05f, transform.position.z);
-                }
+                    transform.position = new Vector3(transform.position.x - 0.045f, transform.position.y - 0.065f, transform.position.z);
+                    transform.localScale = new Vector3(0.78f, 1.0f, 1.0f);
+
+            }
                 else if (angle < 0f || angle >= -90f)
                 {
 
                     spriteRenderer.sprite = down2;
-                //transform.position = new Vector3(transform.position.x + 0.03f, transform.position.y - 0.05f, transform.position.z);
-                }
-                else
+                    transform.position = new Vector3(transform.position.x + 0.015f, transform.position.y - 0.05f, transform.position.z);
+
+            }
+            else
                 {
                     spriteRenderer.sprite = left2;
                 }
@@ -255,12 +265,13 @@ public class HeadFollowMouse : MonoBehaviour
 
             // Reset the local position back to the original local position
             transform.localPosition = originalLocalPosition;
-
+            transform.localScale = previousScale;
             //look up
             if (angle < 90f && angle >= 65f)
             {
                 spriteRenderer.sprite = Up3;
-                transform.position = new Vector3(transform.position.x, transform.position.y - 0.08f, transform.position.z);
+                transform.position = new Vector3(transform.position.x-0.045f, transform.position.y - 0.08f, transform.position.z);
+                transform.localScale = new Vector3(0.78f, 1.0f, 1.0f);  // Scales the object to 110%
             }
             //look diagonal up
             else if (angle <65f && angle >= 10f)
@@ -285,15 +296,21 @@ public class HeadFollowMouse : MonoBehaviour
                 spriteRenderer.sprite = down3;
                 transform.position = new Vector3(transform.position.x - 0.03f, transform.position.y - 0.10f, transform.position.z);
             }
-            else if (angle < -90f && angle >= -185)
+            else if (angle < -90f && angle >= -180)
             {
                 spriteRenderer.sprite = down3;
                 transform.position = new Vector3(transform.position.x - 0.03f, transform.position.y - 0.10f, transform.position.z);
             }
-            else if (angle < 180f && angle <= 90f)
+            else if (angle < 180f && angle >= 90f)
             {
                 spriteRenderer.sprite = Up3;
-                transform.position = new Vector3(transform.position.x, transform.position.y - 0.08f, transform.position.z);
+                transform.position = new Vector3(transform.position.x-0.045f, transform.position.y - 0.08f, transform.position.z);
+                transform.localScale = new Vector3(0.78f, 1.0f, 1.0f);  
+            }
+            else
+            {
+                spriteRenderer.sprite = right3;
+                transform.position = new Vector3(transform.position.x, transform.position.y - 0.04f, transform.position.z);
             }
          
         }

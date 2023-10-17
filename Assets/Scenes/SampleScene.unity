@@ -271,7 +271,7 @@ MonoBehaviour:
   diagonalLeft: {fileID: 21300000, guid: 874e505dee098eb46b61b52a0cd4ffc6, type: 3}
   right: {fileID: 21300000, guid: ebea151340193fe48b3376e027608d51, type: 3}
   diagonalRight: {fileID: 21300000, guid: 5daa229b200d4854ebbf00d33ce54359, type: 3}
-  Up1: {fileID: 21300000, guid: f1b474d454a08e54ea46a56569c563e1, type: 3}
+  Up1: {fileID: 21300000, guid: 86dc1761f1a9f214488314c9e5ac860b, type: 3}
   left1: {fileID: 21300000, guid: 07ea2ae269477204a9bf604546ebcbee, type: 3}
   diagonalLeft1: {fileID: 21300000, guid: 33679fd9fca9bdf4d99551342dde0e75, type: 3}
   right1: {fileID: 21300000, guid: 4fb28c1501a55834d958b42ac9f8c291, type: 3}
