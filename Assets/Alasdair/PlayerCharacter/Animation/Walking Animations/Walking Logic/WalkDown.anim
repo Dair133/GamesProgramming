@@ -21,15 +21,9 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-<<<<<<< Updated upstream:Assets/Art/Player/Animation/Walking Animations/Walking Logic/WalkDown.anim
-      value: {fileID: 21300000, guid: 563868925c1abd04d8e14673929169bc, type: 3}
-    - time: 0.2
-      value: {fileID: 21300000, guid: c9bc3dadb779d774eb233ea37671c853, type: 3}
-=======
       value: {fileID: 21300000, guid: 26c8e51a124e8c34d81b06d8e247999a, type: 3}
     - time: 0.2
       value: {fileID: 21300000, guid: be762aa4c8ce99e41a8f0986dd310b4e, type: 3}
->>>>>>> Stashed changes:Assets/Alasdair/PlayerCharacter/Animation/Walking Animations/Walking Logic/WalkDown.anim
     attribute: m_Sprite
     path: 
     classID: 212
@@ -52,13 +46,8 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-<<<<<<< Updated upstream:Assets/Art/Player/Animation/Walking Animations/Walking Logic/WalkDown.anim
-    - {fileID: 21300000, guid: 563868925c1abd04d8e14673929169bc, type: 3}
-    - {fileID: 21300000, guid: c9bc3dadb779d774eb233ea37671c853, type: 3}
-=======
     - {fileID: 21300000, guid: 26c8e51a124e8c34d81b06d8e247999a, type: 3}
     - {fileID: 21300000, guid: be762aa4c8ce99e41a8f0986dd310b4e, type: 3}
->>>>>>> Stashed changes:Assets/Alasdair/PlayerCharacter/Animation/Walking Animations/Walking Logic/WalkDown.anim
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -67,7 +56,7 @@ AnimationClip:
     m_StopTime: 0.4
     m_OrientationOffsetY: 0
     m_Level: 0
-    m_CycleOffset: 0.5
+    m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
     m_LoopTime: 1
     m_LoopBlend: 0
@@ -83,36 +72,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-<<<<<<< Updated upstream:Assets/Art/Player/Animation/Walking Animations/Walking Logic/WalkDown.anim
-  m_Events:
-  - time: 0.2
-    functionName: 
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.2
-    functionName: 
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.2
-    functionName: 
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.2
-    functionName: 
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-=======
   m_Events: []
->>>>>>> Stashed changes:Assets/Alasdair/PlayerCharacter/Animation/Walking Animations/Walking Logic/WalkDown.anim

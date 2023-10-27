@@ -599,7 +599,7 @@ MonoBehaviour:
   diagonalLeft: {fileID: 21300000, guid: 874e505dee098eb46b61b52a0cd4ffc6, type: 3}
   right: {fileID: 21300000, guid: ebea151340193fe48b3376e027608d51, type: 3}
   diagonalRight: {fileID: 21300000, guid: 5daa229b200d4854ebbf00d33ce54359, type: 3}
-  Up1: {fileID: 21300000, guid: f1b474d454a08e54ea46a56569c563e1, type: 3}
+  Up1: {fileID: 21300000, guid: 09826455b45d7964f86da99e5d0f4564, type: 3}
   left1: {fileID: 21300000, guid: 07ea2ae269477204a9bf604546ebcbee, type: 3}
   diagonalLeft1: {fileID: 21300000, guid: 33679fd9fca9bdf4d99551342dde0e75, type: 3}
   right1: {fileID: 21300000, guid: 4fb28c1501a55834d958b42ac9f8c291, type: 3}
@@ -1258,8 +1258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe7d11972c12a64f9d66325e1dcda37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1055294507}
   head: {fileID: 425716469}
+  player: {fileID: 1055294507}
   pivotOffset: {x: 0, y: 0.2, z: 0}
 --- !u!1 &789635486
 GameObject:

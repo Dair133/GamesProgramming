@@ -49,6 +49,7 @@ public class HeadFollowMouse : MonoBehaviour
     void Update()
     {
 
+
         Animator parentAnimator = transform.parent.GetComponent<Animator>();
         ;
         Vector3 mousePos = Input.mousePosition;
@@ -62,9 +63,15 @@ public class HeadFollowMouse : MonoBehaviour
             clipName = currentClip.name;
             //Debug.Log("Current clip name: " + clipName);
         }
-       // if (mousePos != lastMousePosition || lastPosition != currentPosition)
-       //  {
-            if (clipName.Equals("IdleDown") || clipName.Equals("WalkDown"))
+
+        if (Vector3.Distance(lastMousePosition, mousePos) > 0.015f) ;
+        //do nothing
+           else
+             return;
+
+        // if (mousePos != lastMousePosition || lastPosition != currentPosition)
+        //  {
+        if (clipName.Equals("IdleDown") || clipName.Equals("WalkDown"))
             {
                 lastMousePosition = mousePos;
                 lastPosition = currentPosition;
@@ -129,7 +136,7 @@ public class HeadFollowMouse : MonoBehaviour
 
                 if (angle > 157.5f || angle <= -157.5f)
                 {
-                Debug.Log("Head left 1");
+               // Debug.Log("Head left 1");
                     spriteRenderer.sprite = left1;
                     transform.position = new Vector3(transform.position.x, transform.position.y - 0.20f, transform.position.z);
                 }
@@ -153,9 +160,9 @@ public class HeadFollowMouse : MonoBehaviour
                 }
                 else if (angle > -67.5f && angle <= -22.5f)
                 {
-<<<<<<< Updated upstream:Assets/Art/Player/Animation/Head Animations/HeadMovement.cs
+//<<<<<<< Updated upstream:Assets/Art/Player/Animation/Head Animations/HeadMovement.cs
                     // Not needed as the character can't look backward
-=======
+//=======
                     spriteRenderer.sprite = right1;
                     transform.position = new Vector3(transform.position.x + 0.03f, transform.position.y - 0.20f, transform.position.z);
             }
@@ -168,84 +175,91 @@ public class HeadFollowMouse : MonoBehaviour
                 else
                 {
                     spriteRenderer.sprite = Up1;
->>>>>>> Stashed changes:Assets/Alasdair/PlayerCharacter/Animation/Head Animations/HeadMovement.cs
+//>>>>>>> Stashed changes:Assets/Alasdair/PlayerCharacter/Animation/Head Animations/HeadMovement.cs
                 }
-                else if (angle > -112.5f && angle <= -67.5f)
+                 if (angle > -112.5f && angle <= -67.5f)
                 {
                     // Not needed as the character can't look backward
                 }
-                else if (angle > -157.5f && angle <= -112.5f)
+                 if (angle > -157.5f && angle <= -112.5f)
                 {
                     spriteRenderer.sprite = diagonalLeft1;
                 }
             }
-            if (clipName.Equals("WalkLeft") || clipName.Equals("IdleLeft"))
+        if (clipName.Equals("WalkLeft") || clipName.Equals("IdleLeft"))
+        {
+            lastMousePosition = mousePos;
+            Vector2 direction = new Vector2(
+            mousePos.x - transform.position.x,
+            mousePos.y - transform.position.y
+            );
+
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            //Debug.Log(angle + "ClipName Inside WalkLeft" + clipName);
+
+            // Reset the local position back to the original local position
+            transform.localPosition = originalLocalPosition;
+
+            //look up
+            if (angle > 90f && angle <= 124f)
             {
-                lastMousePosition = mousePos;
-                Vector2 direction = new Vector2(
-                mousePos.x - transform.position.x,
-                mousePos.y - transform.position.y
-                );
-
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                //Debug.Log(angle + "ClipName Inside WalkLeft" + clipName);
-
-                // Reset the local position back to the original local position
-                transform.localPosition = originalLocalPosition;
-
-                //look up
-                if (angle > 90f && angle <= 124f)
-                {
-                    spriteRenderer.sprite = Up2;
-                    transform.position = new Vector3(transform.position.x, transform.position.y - 0.05f, transform.position.z);
-                }
-                else if (angle > 124f && angle <= 170f)
-                {
-                    spriteRenderer.sprite = diagonalUp1;
-                }
-                else if (angle > 170f || angle <= -170f)
-                {
-          
-                spriteRenderer.sprite = left2;
-                }
-                else if (angle > -125f && angle <= -70f)
-                {
-                    spriteRenderer.sprite = down2;
-                    transform.position = new Vector3(transform.position.x + 0.03f, transform.position.y - 0.05f, transform.position.z);
-                }
-                else if (angle > -160f && angle <= -115f)
-                {
-                    spriteRenderer.sprite = diagonalDown2;
-                }
-                //if mouse is behind character
-                else if(angle < 70f || angle >= -70f)
-                {
-<<<<<<< Updated upstream:Assets/Art/Player/Animation/Head Animations/HeadMovement.cs
-                Debug.Log("MOUSE BEHIND CHARACTER");
-                spriteRenderer.sprite = left2;
-                    //transform.position = new Vector3(transform.position.x + 0.03f, transform.position.y - 0.05f, transform.position.z);
-=======
-                Debug.Log("Head down 2");
-                    spriteRenderer.sprite = down2;
-                    transform.position = new Vector3(transform.position.x - 0.15f, transform.position.y - 0.40f, transform.position.z);
->>>>>>> Stashed changes:Assets/Alasdair/PlayerCharacter/Animation/Head Animations/HeadMovement.cs
-                }
+                spriteRenderer.sprite = Up2;
+                transform.position = new Vector3(transform.position.x, transform.position.y - 0.05f, transform.position.z);
             }
-<<<<<<< Updated upstream:Assets/Art/Player/Animation/Head Animations/HeadMovement.cs
-=======
-                else if (angle < 0f || angle >= -90f)
-                {
+            else if (angle > 124f && angle <= 170f)
+            {
+                spriteRenderer.sprite = diagonalUp1;
+            }
+            else if (angle > 170f || angle <= -170f)
+            {
 
-                    spriteRenderer.sprite = down2;
-                    transform.position = new Vector3(transform.position.x-0.15f, transform.position.y - 0.40f, transform.position.z);
+                spriteRenderer.sprite = left2;
+            }
+            else if (angle > -125f && angle <= -100f)
+            {
+                spriteRenderer.sprite = down2;
+                transform.position = new Vector3(transform.position.x + 0.15f, transform.position.y - 0.40f, transform.position.z);
+            }
+            else if (angle > -160f && angle <= -115f)
+            {
+                spriteRenderer.sprite = diagonalDown2;
+            }
+            //if mouse is behind character
+            //else if (angle < 70f || angle >= -70f)
+            //{
+            //    Debug.Log("MOUSE BEHIND CHARACTER");
+            //    //spriteRenderer.sprite = left2;
+            //    //transform.position = new Vector3(transform.position.x + 0.03f, transform.position.y - 0.05f, transform.position.z);
+            //    //=======
 
+            //    spriteRenderer.sprite = down2;
+            //    transform.position = new Vector3(transform.position.x - 0.15f, transform.position.y - 0.40f, transform.position.z);
+            //    //>>>>>>> Stashed changes:Assets/Alasdair/PlayerCharacter/Animation/Head Animations/HeadMovement.cs
+            //}
+
+            //<<<<<< Updated upstream:Assets/Art/Player/Animation/Head Animations/HeadMovement.cs
+            //=======
+            else if (angle < 0f && angle >= -100f)
+            {
+                Debug.Log("Head down 2");
+                spriteRenderer.sprite = down2;
+                transform.position = new Vector3(transform.position.x - 0.15f, transform.position.y - 0.40f, transform.position.z);
+
+            }
+            else if (angle > 0 && angle < 90)
+            {
+                spriteRenderer.sprite = Up2;
+                transform.position = new Vector3(transform.position.x, transform.position.y - 0.05f, transform.position.z);
             }
             else
-                {
-                    spriteRenderer.sprite = left2;
-                }
+            {
+                spriteRenderer.sprite = left2;
+            }
+
+
+
         }
->>>>>>> Stashed changes:Assets/Alasdair/PlayerCharacter/Animation/Head Animations/HeadMovement.cs
+//>>>>>>> Stashed changes:Assets/Alasdair/PlayerCharacter/Animation/Head Animations/HeadMovement.cs
             if (clipName.Equals("WalkRight") || clipName.Equals("IdleRight"))
             {
             lastMousePosition = mousePos;
@@ -255,12 +269,12 @@ public class HeadFollowMouse : MonoBehaviour
             );
 
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-<<<<<<< Updated upstream:Assets/Art/Player/Animation/Head Animations/HeadMovement.cs
+//<<<<<<< Updated upstream:Assets/Art/Player/Animation/Head Animations/HeadMovement.cs
             Debug.Log(angle + "ClipName Inside WalkRight" + clipName);
-=======
+//=======
             float clampedAngle = Mathf.Clamp(angle, -180f, 180f);
             //Debug.Log(angle + "ClipName Inside WalkRight" + clipName);
->>>>>>> Stashed changes:Assets/Alasdair/PlayerCharacter/Animation/Head Animations/HeadMovement.cs
+//>>>>>>> Stashed changes:Assets/Alasdair/PlayerCharacter/Animation/Head Animations/HeadMovement.cs
 
             // Reset the local position back to the original local position
             transform.localPosition = originalLocalPosition;
@@ -296,25 +310,33 @@ public class HeadFollowMouse : MonoBehaviour
             }
             else if (angle > -90f && angle <= -45f)
             {
-<<<<<<< Updated upstream:Assets/Art/Player/Animation/Head Animations/HeadMovement.cs
+//<<<<<<< Updated upstream:Assets/Art/Player/Animation/Head Animations/HeadMovement.cs
                 // Not needed as the character can't look backward
-=======
+//=======
                 spriteRenderer.sprite = down3;
-                transform.position = new Vector3(transform.position.x - 0.03f, transform.position.y - 0.3f, transform.position.z);
->>>>>>> Stashed changes:Assets/Alasdair/PlayerCharacter/Animation/Head Animations/HeadMovement.cs
+                transform.position = new Vector3(transform.position.x - 0.03f, transform.position.y - 0.40f, transform.position.z);
+//>>>>>>> Stashed changes:Assets/Alasdair/PlayerCharacter/Animation/Head Animations/HeadMovement.cs
             }
-            else if (angle > -135f && angle <= -90f)
+            else if (angle < -90 && angle < 180)
             {
-                // Not needed as the character can't look backward
+                spriteRenderer.sprite = down3;
+                transform.position = new Vector3(transform.position.x - 0.03f, transform.position.y - 0.40f, transform.position.z);
             }
-            //else if (angle > -180f && angle <= -135f)
-            //{
-            //    spriteRenderer.sprite = diagonalDown2;
-            //}
+            else if(angle < 180 && angle > 90)
+            {
+                spriteRenderer.sprite = Up3;
+                transform.position = new Vector3(transform.position.x, transform.position.y - 0.05f, transform.position.z);
+            }
+            else
+            {
+                spriteRenderer.sprite = right3;
+                transform.position = new Vector3(transform.position.x, transform.position.y - 0.04f, transform.position.z);
+            }
+           
         }
 
 
 
-        // }
+         //}
     }
 }
