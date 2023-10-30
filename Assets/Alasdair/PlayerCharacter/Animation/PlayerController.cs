@@ -18,6 +18,11 @@ public class PlayerController : MonoBehaviour
     public GameObject head;
     SpriteRenderer headSprite;
 
+    [Header("Bools for selecting animation")]
+    public bool isHoldingLargeWeapon = false;
+    public bool isHoldingObject = false;
+    public bool isHoldingNothing = false;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -35,8 +40,8 @@ public class PlayerController : MonoBehaviour
             input.y = Input.GetAxisRaw("Vertical");
 
             //*
-           // Debug.Log("Values x:"+input.x);
-          //  Debug.Log("Values y:" + input.y);
+            //Debug.Log("Values x:"+input.x);
+            //Debug.Log("Values y:" + input.y);
             //if input is different than 0 then run something
             //We can remove diagonal movement its done at end of tutorial if we need to remove it.
             if (input != Vector2.zero)
@@ -114,6 +119,31 @@ public class PlayerController : MonoBehaviour
         {
             return 3;
         }
+    }
+
+
+    public void ChooseAnimation(GameObject heldItemObject)
+    {
+
+        //maybe transfer this section of code to player controller?
+        if (heldItemObject.tag.Equals("LargeWeapon"))
+        {
+            //Debug.Log("Holding large weapon");
+            isHoldingLargeWeapon = true;
+        }
+        else if (heldItemObject.tag.Equals("Object"))
+        {
+            //Debug.Log("Altering bool for object holding");
+           isHoldingObject = true;
+           isHoldingLargeWeapon = false;
+        }
+        else
+        {
+            // playerControllerScript.isHoldingLargeWeapon = false;
+            // playerControllerScript.isHoldingObject = false;
+        }
+
+
     }
 
 

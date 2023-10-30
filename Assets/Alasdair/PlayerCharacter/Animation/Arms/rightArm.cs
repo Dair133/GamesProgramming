@@ -7,16 +7,13 @@ public class rightArm : MonoBehaviour
     public Vector3 pivotOffset = new Vector3(0, 0.2f, 0);  // Offset of the pivot point from the transform position
 
     /*Following bools determine which animation is played */
-    [Header("Bools for selecting animation")]
-    public bool isHoldingLargeWeapon;
-    public bool isHoldingObject;
 
 
 
 
    
     public GameObject player;
-    public GameObject head;
+   // public GameObject head;
 
     private string clipName;
 
@@ -31,47 +28,61 @@ public class rightArm : MonoBehaviour
 
     private PlayerController playerControllerScript;
 
+    private Transform playerTransform;
+    private Transform heldItemTransform;
+    private GameObject heldItemObject;
 
-    private SpriteRenderer headSprite;
+    private SpriteRenderer rightArmSprite;
 
 
     private void Start()
     {
-        headSprite = head.GetComponent<SpriteRenderer>();
+         rightArmSprite = this.gameObject.GetComponent<SpriteRenderer>();
+
         lastMousePosition = Input.mousePosition;
         originalPosition = transform.localPosition;
-
-
-      
-
+       
+       
         //basically gets the parent of the righrArm, so we can do the equivalent of super.yourFunction.
         playerControllerScript = transform.parent.GetComponent<PlayerController>();
-
+    
         //intialise clip is a function of the parent as its being used in all children
         previousClip = playerControllerScript.InitializeClip();
+
+
+   
     }
 
    
     void Update()
     {
+        player = transform.parent.gameObject;
+        playerTransform = transform.parent;
         //originalPosition = transform.localPosition;
         Vector3 mousePos = Input.mousePosition;
 
+        heldItemTransform = playerTransform.GetChild(3);
+    
+        heldItemObject = heldItemTransform.gameObject;
 
-       
+   
+       playerControllerScript.ChooseAnimation(heldItemObject);
+        
 
-        clipName = headSprite.sprite.name;
+
+      
         clipChoice = playerControllerScript.InitializeClip();
       
 
-        if (isHoldingLargeWeapon == true)
+        if (playerControllerScript.isHoldingLargeWeapon == true)
         {
            holdingLargeWeapon(mousePos);
         }
 
-        else if(isHoldingObject == true)
+        else if(playerControllerScript.isHoldingObject == true)
         {
-            //holding object function here
+            Debug.Log("Entering holding object if statment");
+            holdingObject();
         }
         else
         {
@@ -82,8 +93,43 @@ public class rightArm : MonoBehaviour
     }//end of update function
     void holdingObject()
     {
+        if(clipChoice != 2)
+        {
+            rightArmSprite.sortingOrder = 2;
+        }
+
+        if(clipChoice == 0)//left
+        {
+
+            //transform.rotation = Quaternion.AngleAxis(70f, Vector3.forward);
+            transform.localPosition = new Vector3(originalPosition.x - 0.4f, originalPosition.y, originalPosition.y);
+            transform.rotation = Quaternion.AngleAxis(-50f, Vector3.forward);
+            transform.localScale = new Vector3(1f, 1.1f, 0f);
+        }
+        else if(clipChoice == 1)//right
+        {
+            transform.localPosition = new Vector3(originalPosition.x-0.15f, originalPosition.y, originalPosition.z);
+            transform.rotation = Quaternion.AngleAxis(70f, Vector3.forward);
+            transform.localScale = new Vector3(1f, 1.1f, 0f);
+        }
+        else if(clipChoice == 2)
+        {
+            transform.localPosition = new Vector3(originalPosition.x, originalPosition.y, originalPosition.z);
+            transform.rotation = Quaternion.AngleAxis(-50f, Vector3.forward);
+            transform.localScale = new Vector3(1f, 1f, 0f);
+            rightArmSprite.sortingOrder = -2;
+        }
+
+        else if(clipChoice == 3)//down
+        {
+            Debug.Log("inside down");
+            transform.localPosition = new Vector3(originalPosition.x, transform.localPosition.y, transform.localPosition.z);
+            transform.rotation = Quaternion.AngleAxis(-50f, Vector3.forward);
+            transform.localScale = new Vector3(1f, 1f, 0f);
+        }
 
 
+     
 
 
 
@@ -211,7 +257,7 @@ public class rightArm : MonoBehaviour
             }
             else if (angle < 75 && angle > 0)
             {
-                Debug.Log("scaling section new");
+              
                 float scaleFactor2 = Mathf.Lerp(angle + 100f, angle + 120f, Mathf.InverseLerp(0, 75f, angle));
                 transform.rotation = Quaternion.AngleAxis(scaleFactor2, Vector3.forward);
             }
@@ -236,7 +282,7 @@ public class rightArm : MonoBehaviour
             }
             else if (angle > 90 && angle < 165)
             {
-                Debug.Log("In second half");
+         
                 float scaleFactor = Mathf.Lerp(angle + 80f, angle + 90f, Mathf.InverseLerp(90f, 175f, angle));
                 transform.rotation = Quaternion.AngleAxis(scaleFactor, Vector3.forward);
 
@@ -250,6 +296,10 @@ public class rightArm : MonoBehaviour
 
         else if (clipChoice == 3)//down
         {
+            if (previousClip != 3)
+            {
+                this.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+            }
             if (angle < -20 && angle > -80)
             {
                 transform.rotation = Quaternion.AngleAxis(angle + 70f, Vector3.forward);

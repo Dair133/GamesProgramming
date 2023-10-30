@@ -11,12 +11,8 @@ public class leftArm : MonoBehaviour
 
     private GameObject currentArm;
 
-    /*Following bools determine which animation is played */
-    //possible move bools into parent class? so dont have to be set on individual arms??
-    [Header("Bools for selecting animation")]
-    public bool ishHoldingLargeWeapon;
-    public bool isHoldingObject;
 
+  
 
     SpriteRenderer leftArmSprite;
     SpriteRenderer headSprite;
@@ -33,6 +29,7 @@ public class leftArm : MonoBehaviour
 
     private int clipChoice;
     private int previousClip;
+
 
     void Start()
     {
@@ -58,11 +55,11 @@ public class leftArm : MonoBehaviour
 
     
     
-        if(isHoldingObject == true)
+        if(playerControllerScript.isHoldingObject == true)
         {
-           
+           holdingObject();
         }
-        else if(ishHoldingLargeWeapon == true)
+        else if(playerControllerScript.isHoldingLargeWeapon == true)
         {
             holdingLargeWeapon(mousePos);
         }
@@ -75,9 +72,36 @@ public class leftArm : MonoBehaviour
 
     void holdingObject()
     {
+        if (clipChoice != 2)
+        {
+            leftArmSprite.sortingOrder = 2;
+        }
 
-
-
+        if (clipChoice == 0)//left
+        {
+            transform.localPosition = new Vector3(originalPosition.x, originalPosition.y, originalPosition.z);
+            transform.rotation = Quaternion.AngleAxis(320f, Vector3.forward);
+            transform.localScale = new Vector3(1f, 1.1f, 0f);
+        }
+       if(clipChoice == 1)//right
+        {
+            transform.localPosition = new Vector3(originalPosition.x + 0.35f, originalPosition.y, originalPosition.z);
+            transform.rotation = Quaternion.AngleAxis(50f, Vector3.forward);
+            transform.localScale = new Vector3(1f, 1.1f, 0f);
+        }
+       if(clipChoice == 2)//up
+        {
+            transform.localPosition = new Vector3(originalPosition.x, originalPosition.y, originalPosition.z);
+            transform.localScale = new Vector3(1f, 1f, 0f);
+            leftArmSprite.sortingOrder = -2;
+        }
+        
+        if(clipChoice == 3)//down
+        {
+            transform.localPosition = new Vector3(originalPosition.x, originalPosition.y, originalPosition.z);
+            transform.rotation = Quaternion.AngleAxis(50f, Vector3.forward);
+            transform.localScale = new Vector3(1f, 1f, 0f);
+        }
 
 
     }

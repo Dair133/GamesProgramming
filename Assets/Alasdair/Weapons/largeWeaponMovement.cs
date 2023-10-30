@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class WeaponMovement : MonoBehaviour
+public class itemMovememnt : MonoBehaviour
 {
 
     // Start is called before the first frame update
@@ -19,9 +19,9 @@ public class WeaponMovement : MonoBehaviour
 
     private bool previousFlip;
 
-    public GameObject head;
+
     private GameObject weaponObject;
-    public GameObject player;
+    private GameObject player;
 
     private SpriteRenderer headSprite;
     private SpriteRenderer weaponSprite;
@@ -29,8 +29,10 @@ public class WeaponMovement : MonoBehaviour
     private PlayerController playerControllerScript;
     void Start()
     {
+        player = transform.parent.gameObject;
+        transform.position = new Vector3(-0.084f, -0.303f, 0);
         startingWeaponPosition = transform.localPosition;
-        headSprite = head.GetComponent<SpriteRenderer>();
+        headSprite = player.GetComponentInChildren<SpriteRenderer>();
         weaponSprite = GetComponent<SpriteRenderer>();
         weaponObject = this.gameObject;
         playerControllerScript = transform.parent.GetComponent<PlayerController>();
@@ -46,7 +48,22 @@ public class WeaponMovement : MonoBehaviour
     {
         Vector3 mousePos = Input.mousePosition;
 
-        rotateWeapon(mousePos);
+        if (playerControllerScript.isHoldingLargeWeapon)
+        {
+            rotateLargeWeapon(mousePos);
+        }
+        else if(playerControllerScript.isHoldingObject == true)
+        {
+            //hold object (i.e code to move the object when an object is being held)
+            //probably no need for any code here as object is just going to be held out by player and stationery
+
+        }
+        else
+        {
+            //do nothing
+        }
+
+      
 
 
     }//end of update
@@ -55,7 +72,7 @@ public class WeaponMovement : MonoBehaviour
     public Vector3 pivotOffset = new Vector3(0, 0.2f, 0);  // Offset of the pivot point from the transform position
     // Update is called once per frame
 
-    void rotateWeapon(Vector3 mousePos)
+    void rotateLargeWeapon(Vector3 mousePos)
     {
         //if (Vector3.Distance(lastMousePosition, mousePos) > 0.015f) ;
         //do nothing
@@ -252,7 +269,7 @@ public class WeaponMovement : MonoBehaviour
             previousClip = 0;
             if (angle <= 0 && angle >= -165)
             {
-                Debug.Log("angle: " + angle + "Weapon angle" + weaponMouseAngle);
+               // Debug.Log("angle: " + angle + "Weapon angle" + weaponMouseAngle);
                 // Calculate the x position offset based on the angle, let's say it moves between -0.3 and 0.3
                 float xPos = Mathf.Lerp(0.3f, -0.3f, Mathf.Abs(weaponMouseAngle + 180) / 180);
 
