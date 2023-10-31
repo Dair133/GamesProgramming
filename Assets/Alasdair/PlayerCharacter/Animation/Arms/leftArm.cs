@@ -11,7 +11,7 @@ public class leftArm : MonoBehaviour
 
     private GameObject currentArm;
 
-
+    public int rotationSpeed;
   
 
     SpriteRenderer leftArmSprite;
@@ -53,9 +53,8 @@ public class leftArm : MonoBehaviour
 
         clipChoice = playerControllerScript.InitializeClip();
 
-    
-    
-        if(playerControllerScript.isHoldingObject == true)
+     
+        if (playerControllerScript.isHoldingObject == true)
         {
            holdingObject();
         }
@@ -63,13 +62,34 @@ public class leftArm : MonoBehaviour
         {
             holdingLargeWeapon(mousePos);
         }
+        else if(playerControllerScript.isHoldingMeleeWeapon == true)
+        {
+            holdingMeleeWeapon();
+        }
+        
         else
         {
             
             holdingNothing(mousePos);
         }
     }
+    void holdingMeleeWeapon()
+    {
+        if(clipChoice == 3)
+        {
+            transform.localScale = new Vector3(1f, 1.1f, 0f);
+            transform.localRotation = Quaternion.AngleAxis(0f, Vector3.forward);
+            if (Input.GetMouseButtonDown(0))
+            {
+                
+                StartCoroutine(MoveArm());
+            }
 
+        }
+
+
+
+    }
     void holdingObject()
     {
         if (clipChoice != 2)
@@ -271,8 +291,26 @@ public class leftArm : MonoBehaviour
             transform.localScale = new Vector3(1f, scaleFactor3, 0f);
         }
     }
-}
+       
+    }
 
-    
-   
+
+    IEnumerator MoveArm()
+    {
+        Quaternion originalRotation = Quaternion.Euler(0, 0, 90); // Set the original angle to -130
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, -90)); // Set the target angle to 180
+
+        float time = 0;
+        float speed = 2f;  // Set the speed of the arm movement
+
+        while (time < 1)
+        {
+            time += Time.deltaTime * rotationSpeed;
+            transform.rotation = Quaternion.Lerp(originalRotation, targetRotation, time);
+            yield return null;
+        }
+
+        // Return to the original rotation
+        transform.rotation = originalRotation;
+    }
 }

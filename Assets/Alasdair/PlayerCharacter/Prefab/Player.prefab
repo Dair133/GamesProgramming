@@ -315,6 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 8709203319665862208}
   head: {fileID: 514050171254992065}
+  rotationSpeed: 2
   pivotOffset: {x: 0, y: 0.2, z: 0}
 --- !u!1 &8709203319665862208
 GameObject:
@@ -331,7 +332,7 @@ GameObject:
   - component: {fileID: 1068125087203021766}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: PlayerTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -424,6 +425,7 @@ MonoBehaviour:
   head: {fileID: 514050171254992065}
   isHoldingLargeWeapon: 0
   isHoldingObject: 0
+  isHoldingMeleeWeapon: 0
   isHoldingNothing: 0
 --- !u!50 &7096942544166466446
 Rigidbody2D:

@@ -81,8 +81,13 @@ public class rightArm : MonoBehaviour
 
         else if(playerControllerScript.isHoldingObject == true)
         {
-            Debug.Log("Entering holding object if statment");
+            
             holdingObject();
+        }
+        else if(playerControllerScript.isHoldingMeleeWeapon == true)
+        {
+            //Debug.Log("Holding a melee weapon");
+            holdingMeleeWeapon();
         }
         else
         {
@@ -91,6 +96,13 @@ public class rightArm : MonoBehaviour
            
 
     }//end of update function
+    void holdingMeleeWeapon()
+    {
+
+
+
+    }
+
     void holdingObject()
     {
         if(clipChoice != 2)
@@ -122,7 +134,7 @@ public class rightArm : MonoBehaviour
 
         else if(clipChoice == 3)//down
         {
-            Debug.Log("inside down");
+            //Debug.Log("inside down");
             transform.localPosition = new Vector3(originalPosition.x, transform.localPosition.y, transform.localPosition.z);
             transform.rotation = Quaternion.AngleAxis(-50f, Vector3.forward);
             transform.localScale = new Vector3(1f, 1f, 0f);
@@ -193,7 +205,7 @@ public class rightArm : MonoBehaviour
 
         // Rotate the arm to face the mouse pointer
         lastMousePosition = mousePos;
-        Debug.Log(angle + " " + clipChoice);
+        //Debug.Log(angle + " " + clipChoice);
         
         /*
          * ARM ANIMATIONS WHEN FACING LEFT

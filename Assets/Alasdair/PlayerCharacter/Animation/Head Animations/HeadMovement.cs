@@ -64,7 +64,7 @@ public class HeadFollowMouse : MonoBehaviour
         {
             AnimationClip currentClip = clipInfo[0].clip;
             clipName = currentClip.name;
-            Debug.Log("Current clip name: " + clipName);
+            //Debug.Log("Current clip name: " + clipName);
         }
 
         //fixes an unusual error which causes the walown animation to play when the player is not walking down
@@ -168,7 +168,7 @@ public class HeadFollowMouse : MonoBehaviour
             transform.localPosition = originalLocalPosition;
 
             //look up
-            Debug.Log("INSIDE THE LEFT LEFT LEFT");
+           /// Debug.Log("INSIDE THE LEFT LEFT LEFT");
             if (angle > 90f && angle <= 124f)
             {
                 spriteRenderer.sprite = Up2;

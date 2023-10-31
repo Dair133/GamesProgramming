@@ -48,6 +48,10 @@ public class GameManager : MonoBehaviour
     void loadSelectedItem()
     {
         Vector3 originalObjectScale;
+        //oiginal rotation
+        Quaternion originalObjectRotation;
+
+
         //gun selected from inventory
         itemSelected = pullItemFromList(testGunPrefab);
         previousItemSelected = itemSelected;
@@ -57,13 +61,16 @@ public class GameManager : MonoBehaviour
 
 
         originalObjectScale = itemSelected.transform.localScale;
+        originalObjectRotation = itemSelected.transform.rotation;
         GameObject instantiatedItem = Instantiate(itemSelected, playerInstance.transform.position, Quaternion.identity);
 
         // Set the player as the parent of the instantiated item
         instantiatedItem.transform.SetParent(playerInstance.transform);
         instantiatedItem.transform.localPosition = new Vector3(0, 0, 0);
         //Debug.Log("original scale" + originalObjectScale);
-        instantiatedItem.transform.localScale = originalObjectScale/5;//we divide by 5 because its scaled by 5 cause player is, so divide to get original scale
+        instantiatedItem.transform.localRotation = originalObjectRotation;
+        instantiatedItem.transform.localScale = originalObjectScale/5;
+        //we divide by 5 because its scaled by 5 cause player is, so divide to get original scale
         //position of the individual different items say for large weapons can be set in large weapon script
         // so in the large weapon script we set it at the begining accoridngly because all large weapons will 
         //need to have the same position

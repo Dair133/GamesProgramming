@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5704123167773731382}
   - component: {fileID: 217854111855989458}
-  - component: {fileID: -7598112453183778853}
+  - component: {fileID: -1907247255181111515}
+  - component: {fileID: 4547568535561138578}
   m_Layer: 0
   m_Name: Rifle
   m_TagString: LargeWeapon
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-7598112453183778853
+--- !u!114 &-1907247255181111515
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,3 +99,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pivotOffset: {x: 0, y: 0.2, z: 0}
+--- !u!114 &4547568535561138578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411404600623326008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 030ddc68c9b8e744e8bd4dfcfb12b58a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

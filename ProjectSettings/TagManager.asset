@@ -8,6 +8,9 @@ TagManager:
   - Nothing
   - Head
   - Object
+  - Melee
+  - PlayerTag
+  - Bullet
   layers:
   - Default
   - TransparentFX

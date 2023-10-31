@@ -16,7 +16,7 @@ public class itemMovememnt : MonoBehaviour
     private Vector3 lastMousePosition;
     private Vector3 startingWeaponPosition;
     private Vector3 lastValidPosition;
-
+    
     private bool previousFlip;
 
 

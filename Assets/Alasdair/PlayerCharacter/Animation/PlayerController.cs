@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [Header("Bools for selecting animation")]
     public bool isHoldingLargeWeapon = false;
     public bool isHoldingObject = false;
+    public bool isHoldingMeleeWeapon = false;
     public bool isHoldingNothing = false;
 
     private void Awake()
@@ -130,12 +131,27 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log("Holding large weapon");
             isHoldingLargeWeapon = true;
+            isHoldingObject = false;
+            isHoldingMeleeWeapon = false;
         }
         else if (heldItemObject.tag.Equals("Object"))
         {
             //Debug.Log("Altering bool for object holding");
            isHoldingObject = true;
            isHoldingLargeWeapon = false;
+            isHoldingMeleeWeapon = false;
+        }
+        else if(heldItemObject.tag.Equals("Melee"))
+        {
+           // Debug.Log("melee weapon selected");
+            isHoldingMeleeWeapon = true;
+            isHoldingLargeWeapon = false;
+            isHoldingObject = false;
+        }
+        else if(heldItemObject.tag.Equals("Nothing"))
+        {
+            isHoldingNothing = true;
+            isHoldingLargeWeapon = false;
         }
         else
         {
