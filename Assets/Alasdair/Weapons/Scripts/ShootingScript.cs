@@ -30,14 +30,24 @@ public class ShootingScript : MonoBehaviour
 
     void Shoot()
     {
-        // Calculate the position where the bullet should be instantiated
-        Vector3 spawnPosition = transform.position + transform.TransformDirection(bulletOffset);
+        // Calculate the position where the bullet should be instantiated based on local offset
+        // Fixed local offset for bullet spawn position
+        Vector3 localOffset = new Vector3(1.18f, -0.058f, 0);  // You can set these numbers based on what you need
+
+        Vector3 spawnPosition = transform.TransformPoint(localOffset);
 
         // Create bullet at spawnPosition
-        GameObject bullet = Instantiate(bulletPrefab, spawnPosition, transform.rotation);
+        Quaternion adjustedRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z - 90);
+        GameObject bullet = Instantiate(bulletPrefab, spawnPosition, adjustedRotation);
 
-        // Add velocity to the bullet
+        // Destroy the bullet after 10 seconds
+        Destroy(bullet, 10f);
+
+        // Add force to the bullet
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.velocity = transform.up * bulletSpeed;
+        rb.AddForce(bullet.transform.up * bulletSpeed, ForceMode2D.Impulse);
     }
+
+
+
 }

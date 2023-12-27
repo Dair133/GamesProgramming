@@ -9,10 +9,14 @@ public class FollowEnemy : MonoBehaviour
     public float AggroRange;
     private Vector2 steeringForce;
     public float stopRange = 2f;
-
+    public Animator enemyAnimator;  // Animator component
     private void Start()
     {
         speed = 5;
+        if (enemyAnimator == null)
+        {
+            enemyAnimator = GetComponent<Animator>();
+        }
     }
     void Update()
     {
@@ -52,8 +56,15 @@ public class FollowEnemy : MonoBehaviour
             // Move toward the player while avoiding the walls
             if (distanceToPlayer < AggroRange && distanceToPlayer > 1.0f && distanceToPlayer > stopRange)
             {
+
                 transform.position = Vector2.MoveTowards(transform.position, (Vector2)transform.position + desiredDirection, speed * Time.deltaTime);
+                enemyAnimator.SetBool("isMoving", true);
             }
+            else
+            {
+                enemyAnimator.SetBool("isMoving", false);
+            }
+
         }
     }
 }

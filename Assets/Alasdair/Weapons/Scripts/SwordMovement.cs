@@ -20,7 +20,7 @@ public class SwordMovement : MonoBehaviour
         clipChoice = playerControllerScript.InitializeClip();
 
 
-        Debug.Log("melee weapon script" + clipChoice);
+        //Debug.Log("melee weapon script" + clipChoice);
         if (clipChoice == 3)
         {
             transform.localPosition = new Vector3(originalPosition.x - 0.35f, originalPosition.y - 0.4f, originalPosition.z);

@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class ShootRetreat : MonoBehaviour
 {
-   //maybe make it so retreat speed becomes faster the closer the player is to the enemy
     public float retreatSpeed;
     public float followSpeed;
     public Transform target;
     public float AggroRange;
     public float retreatRange;
     public float stopRange;
+    public GameObject bulletPrefab;
+    public float bulletSpeed = 20f;
+    public float shootInterval = 3f;
+    private float nextShootTime;
 
     // Start is called before the first frame update
     void Start()
     {
         followSpeed = 7;
         retreatSpeed = 8;
+        nextShootTime = Time.time;
     }
 
     // Update is called once per frame
@@ -33,21 +37,39 @@ public class ShootRetreat : MonoBehaviour
         else
         {
             float distanceToPlayer = Vector2.Distance(transform.position, target.position);
-            //the enemy moves towards the player as long as the distance between them is less than minimumDistance. If you set a higher value for minimumDistance, the enemy will start moving towards the player even when they are farther apart.
-            if (Vector2.Distance(transform.position, target.position) < AggroRange)
-            {
 
-                    transform.position = Vector2.MoveTowards(transform.position, target.position, -retreatSpeed * Time.deltaTime);
+            if (distanceToPlayer < AggroRange)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, target.position, -retreatSpeed * Time.deltaTime);
             }
-            else if(Vector2.Distance(transform.position, target.position) > AggroRange)
+            else if (distanceToPlayer > AggroRange)
             {
                 transform.position = Vector2.MoveTowards(transform.position, target.position, followSpeed * Time.deltaTime);
             }
-                
-            else
+
+            if (Time.time >= nextShootTime)
             {
-                //Attack Code
+                Vector2 rayStart = transform.position + (target.position - transform.position).normalized * -0.5f;
+                RaycastHit2D hit = Physics2D.Raycast(rayStart, target.position - transform.position, AggroRange);
+
+                if (hit.collider != null)
+                {
+                   
+                  
+                        Shoot();
+                        nextShootTime = Time.time + shootInterval;
+                    
+                }
             }
         }
+    }
+
+    void Shoot()
+    {
+        Debug.Log("Shooting the spell");
+        Vector2 direction = (target.position - transform.position).normalized;
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.velocity = direction * bulletSpeed;
     }
 }
