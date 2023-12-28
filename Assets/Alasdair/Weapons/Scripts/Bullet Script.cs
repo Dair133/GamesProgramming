@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private FollowEnemy goblin;
+    private ShootRetreat storm;
+    public float damage;
+    
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("ENEMY HIT");
@@ -22,10 +15,16 @@ public class BulletScript : MonoBehaviour
         if (other.tag == "Enemy")
         {
             Debug.Log("Enemy hit!");
-
-            // Optional: Destroy the enemy object
-            Destroy(other.gameObject);
-
+            goblin = other.GetComponent<FollowEnemy>();
+            if (goblin == null)
+            {
+                storm = other.GetComponent<ShootRetreat>();
+                storm.TakeDamage(damage);
+            }
+            else
+            {
+                goblin.TakeDamage(damage);
+            }
             // Destroy the bullet
             Destroy(gameObject);
         }
