@@ -19,6 +19,13 @@ public class ShootRetreat : MonoBehaviour
     public float shootInterval = 3f;//how many times enemy shoots per second
     private float nextShootTime;
 
+
+    public float BulletSpawnLocationY;
+    public float BulletSpawnLocationX;
+    public float shootDelay;//dont edit unless know what it does can make animations weird
+    public float animationDelay;
+
+
     private float shootingAnimationEndTime;
 
     // Start is called before the first frame update
@@ -71,14 +78,14 @@ public class ShootRetreat : MonoBehaviour
 
                 if (Time.time >= nextShootTime)
                 {
-                    enemyAnimator.SetBool("isShooting", true);
+                    StartCoroutine(PlayShootingAnimation(animationDelay,true));
                     Vector2 rayStart = transform.position + (target.position - transform.position).normalized * -0.5f;
                     RaycastHit2D hit = Physics2D.Raycast(rayStart, target.position - transform.position, AggroRange);
 
                     if (hit.collider != null)//if enemy finds something to shoot at
                     {
                         //Shoot is only a coroutine to make sure shooting and animation are synced properly.
-                        StartCoroutine(DelayedShoot(0.2f)); // Start coroutine with a 0.1-second delay
+                        StartCoroutine(DelayedShoot(shootDelay)); 
                         nextShootTime = Time.time + shootInterval;
                         shootingAnimationEndTime = Time.time + 0.6f; //Ensures that the shooting animation players for at least 0.6 of a second
                     }
@@ -99,6 +106,15 @@ public class ShootRetreat : MonoBehaviour
         yield return new WaitForSeconds(delay); // Wait for the specified delay
         Shoot();
     }
+    IEnumerator PlayShootingAnimation(float delay,bool ShootingBool)
+    {
+        setShooting(ShootingBool);
+        yield return new WaitForSeconds(delay);
+    }
+    void setShooting(bool setShooting)
+    {
+        enemyAnimator.SetBool("isShooting", setShooting);
+    }
     void Shoot()
     {
         Debug.Log("Shooting the spell");
@@ -111,7 +127,9 @@ public class ShootRetreat : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
 
         // Instantiate the bullet with the calculated rotation
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
+        GameObject bullet = Instantiate(bulletPrefab, new Vector3(transform.position.x-BulletSpawnLocationX,
+            transform.position.y-BulletSpawnLocationY,transform.position.z),
+            rotation);
 
         // Apply velocity to the bullet's Rigidbody2D
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
