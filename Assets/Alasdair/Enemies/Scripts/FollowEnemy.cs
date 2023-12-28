@@ -10,8 +10,15 @@ public class FollowEnemy : MonoBehaviour
     private Vector2 steeringForce;
     public float stopRange = 2f;
     public Animator enemyAnimator;  // Animator component
+    //Health Variables
+    private float health;
+    [SerializeField] FloatingHealthBar healthBar;
+    
     private void Start()
     {
+        //Health Variables
+        health = 100;
+        healthBar = GetComponentInChildren<FloatingHealthBar>();
         speed = 5;
         if (enemyAnimator == null)
         {
@@ -65,6 +72,15 @@ public class FollowEnemy : MonoBehaviour
                 enemyAnimator.SetBool("isMoving", false);
             }
 
+        }
+    }
+    public void TakeDamage(float dmg)
+    {
+        health -= dmg;
+        healthBar.UpdateHealthBar(health);
+        if (health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

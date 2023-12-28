@@ -28,9 +28,18 @@ public class ShootRetreat : MonoBehaviour
 
     private float shootingAnimationEndTime;
 
+    //Health Variables
+    private float health;
+    [SerializeField]
+    private FloatingHealthBar healthBar;
+
     // Start is called before the first frame update
     void Start()
     {
+        //Health Variables
+        health = 100;
+        healthBar = GetComponentInChildren<FloatingHealthBar>();
+        
         if (enemyAnimator == null)//gets animator if not set publically
         {
             enemyAnimator = GetComponent<Animator>();
@@ -135,7 +144,13 @@ public class ShootRetreat : MonoBehaviour
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction * bulletSpeed;
     }
-
-
-
+    public void TakeDamage(float dmg)
+    {
+        health -= dmg;
+        healthBar.UpdateHealthBar(health);
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
