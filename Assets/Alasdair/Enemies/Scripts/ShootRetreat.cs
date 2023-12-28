@@ -4,20 +4,30 @@ using UnityEngine;
 
 public class ShootRetreat : MonoBehaviour
 {
-    public float retreatSpeed;
-    public float followSpeed;
+    public float retreatSpeed;//how fast enemy retreats when player gets close
+    public float followSpeed;//how fast enemy follows when enemy is following
     public Transform target;
-    public float AggroRange;
-    public float retreatRange;
-    public float stopRange;
+
+    public Animator enemyAnimator;
+
+    public float AggroRange;//range at which player will begin attacking/moving/retreating(Enemy will never retreat out of aggro range)
+    public float moveTowardRange;//how far away must player be for enemy to start moving toward
+    public float retreatRange;//how close must the player be for enemy to retreat
+  
     public GameObject bulletPrefab;
     public float bulletSpeed = 20f;
-    public float shootInterval = 3f;
+    public float shootInterval = 3f;//how many times enemy shoots per second
     private float nextShootTime;
+
+    private float shootingAnimationEndTime;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (enemyAnimator == null)//gets animator if not set publically
+        {
+            enemyAnimator = GetComponent<Animator>();
+        }
         followSpeed = 7;
         retreatSpeed = 8;
         nextShootTime = Time.time;
@@ -26,7 +36,12 @@ public class ShootRetreat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target == null)
+        MoveAndShoot();
+    }
+
+    void MoveAndShoot()
+    {
+        if (target == null)//if enemy does not have target to shoot(player not assigned in inspector) we find the player and assign target
         {
             GameObject player = GameObject.FindGameObjectWithTag("PlayerTag");
             if (player != null)
@@ -36,40 +51,73 @@ public class ShootRetreat : MonoBehaviour
         }
         else
         {
-            float distanceToPlayer = Vector2.Distance(transform.position, target.position);
 
+            float distanceToPlayer = Vector2.Distance(transform.position, target.position);//calculates distance to player
+           
             if (distanceToPlayer < AggroRange)
             {
-                transform.position = Vector2.MoveTowards(transform.position, target.position, -retreatSpeed * Time.deltaTime);
-            }
-            else if (distanceToPlayer > AggroRange)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, target.position, followSpeed * Time.deltaTime);
-            }
-
-            if (Time.time >= nextShootTime)
-            {
-                Vector2 rayStart = transform.position + (target.position - transform.position).normalized * -0.5f;
-                RaycastHit2D hit = Physics2D.Raycast(rayStart, target.position - transform.position, AggroRange);
-
-                if (hit.collider != null)
+                //0.8f here stops floating point imprecisions where ghost is retreating one frame and moving towards player next frame despite
+                //being stationery, basically stops weird "vibrating in place" from happening
+                if (distanceToPlayer < retreatRange-0.8f)
                 {
-                   
-                  
-                        Shoot();
-                        nextShootTime = Time.time + shootInterval;
-                    
+                    enemyAnimator.SetBool("isMoving", true);
+                    transform.position = Vector2.MoveTowards(transform.position, target.position, -retreatSpeed * Time.deltaTime);
                 }
-            }
-        }
-    }
+                else if (distanceToPlayer >= moveTowardRange)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, target.position, followSpeed * Time.deltaTime);
+                    enemyAnimator.SetBool("isMoving", true);
+                }
 
+                if (Time.time >= nextShootTime)
+                {
+                    enemyAnimator.SetBool("isShooting", true);
+                    Vector2 rayStart = transform.position + (target.position - transform.position).normalized * -0.5f;
+                    RaycastHit2D hit = Physics2D.Raycast(rayStart, target.position - transform.position, AggroRange);
+
+                    if (hit.collider != null)//if enemy finds something to shoot at
+                    {
+                        //Shoot is only a coroutine to make sure shooting and animation are synced properly.
+                        StartCoroutine(DelayedShoot(0.2f)); // Start coroutine with a 0.1-second delay
+                        nextShootTime = Time.time + shootInterval;
+                        shootingAnimationEndTime = Time.time + 0.6f; //Ensures that the shooting animation players for at least 0.6 of a second
+                    }
+                }
+                if (Time.time > shootingAnimationEndTime)
+                {
+                    enemyAnimator.SetBool("isShooting", false);
+                }
+
+            }
+            enemyAnimator.SetBool("isMoving", false);
+        }
+
+
+    }
+    IEnumerator DelayedShoot(float delay)
+    {
+        yield return new WaitForSeconds(delay); // Wait for the specified delay
+        Shoot();
+    }
     void Shoot()
     {
         Debug.Log("Shooting the spell");
+
+        // Calculate direction from enemy to target
         Vector2 direction = (target.position - transform.position).normalized;
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+
+        // Calculate angle for the bullet's rotation
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.Euler(0, 0, angle);
+
+        // Instantiate the bullet with the calculated rotation
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
+
+        // Apply velocity to the bullet's Rigidbody2D
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction * bulletSpeed;
     }
+
+
+
 }
