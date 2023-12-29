@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class FollowEnemy : MonoBehaviour
 {
+    private PlayerScripts playerHealthScript;
+    private GameObject player;
+    private float lastAttackTime = 0f;
     public float speed;
     public Transform target;
     public float AggroRange;
     private Vector2 steeringForce;
-    public float stopRange = 2f;
+    public float stopRange = 2f;//how close to the player the enemy should stop moving(prevents enemy literally walking on top of player)
     public Animator enemyAnimator;  // Animator component
     //Health Variables
     private float health;
+    public float damage = 1;
     [SerializeField] FloatingHealthBar healthBar;
     
     private void Start()
@@ -24,6 +28,10 @@ public class FollowEnemy : MonoBehaviour
         {
             enemyAnimator = GetComponent<Animator>();
         }
+        if(damage == -1)
+        {
+            damage = 2;
+        }
     }
     void Update()
     {
@@ -31,7 +39,7 @@ public class FollowEnemy : MonoBehaviour
 
         if (target == null)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("PlayerTag");
+            player = GameObject.FindGameObjectWithTag("PlayerTag");
             if (player != null)
             {
                 target = player.GetComponent<Transform>();
@@ -63,13 +71,20 @@ public class FollowEnemy : MonoBehaviour
             // Move toward the player while avoiding the walls
             if (distanceToPlayer < AggroRange && distanceToPlayer > 1.0f && distanceToPlayer > stopRange)
             {
-
+                Debug.Log(distanceToPlayer);
                 transform.position = Vector2.MoveTowards(transform.position, (Vector2)transform.position + desiredDirection, speed * Time.deltaTime);
                 enemyAnimator.SetBool("isMoving", true);
+                enemyAnimator.SetBool("isAttacking", false);
             }
             else
             {
+               // if (Time.time - lastAttackTime >= 0.1f)
+               // {
+                    Debug.Log("STARTING ATTACK"+distanceToPlayer);
+                    StartCoroutine(damagePlayer(damage));
+                //}
                 enemyAnimator.SetBool("isMoving", false);
+                enemyAnimator.SetBool("isAttacking", true);
             }
 
         }
@@ -82,5 +97,19 @@ public class FollowEnemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    IEnumerator damagePlayer(float dmg)
+    {
+
+        
+        dealDamageToPlayer(dmg);
+        yield return null;
+       
+    }
+    void dealDamageToPlayer(float dmg)
+    {
+       
+        playerHealthScript = player.GetComponent<PlayerScripts>();
+        playerHealthScript.TakeDamage(dmg);
     }
 }

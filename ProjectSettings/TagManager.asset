@@ -12,6 +12,11 @@ TagManager:
   - PlayerTag
   - Bullet
   - Enemy
+  - InventoryUI
+  - FireBunny
+  - Goblin
+  - StormGhost
+  - FireGhost
   layers:
   - Default
   - TransparentFX

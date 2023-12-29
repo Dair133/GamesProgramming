@@ -2674,7 +2674,7 @@ GameObject:
   - component: {fileID: 863419430}
   m_Layer: 5
   m_Name: Inventory UI
-  m_TagString: Untagged
+  m_TagString: InventoryUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2854,6 +2854,10 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: -5303643684950934855, guid: db5204f7b77a3da41b5f1aab2d15d7c3, type: 3}
+      propertyPath: shootDelay
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -5303643684950934855, guid: db5204f7b77a3da41b5f1aab2d15d7c3, type: 3}
       propertyPath: followSpeed
       value: 20
       objectReference: {fileID: 0}
@@ -2874,8 +2878,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -5303643684950934855, guid: db5204f7b77a3da41b5f1aab2d15d7c3, type: 3}
+      propertyPath: animationDelay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5303643684950934855, guid: db5204f7b77a3da41b5f1aab2d15d7c3, type: 3}
       propertyPath: moveTowardRange
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: -5303643684950934855, guid: db5204f7b77a3da41b5f1aab2d15d7c3, type: 3}
+      propertyPath: BulletSpawnLocationX
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -5303643684950934855, guid: db5204f7b77a3da41b5f1aab2d15d7c3, type: 3}
+      propertyPath: BulletSpawnLocationY
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1420927736097699878, guid: db5204f7b77a3da41b5f1aab2d15d7c3, type: 3}
       propertyPath: m_AnchorMax.x
@@ -5662,6 +5678,10 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -8786958640624122027, guid: f53be620515b2a0458c0e0cdf615ab10, type: 3}
+      propertyPath: shootDelay
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8786958640624122027, guid: f53be620515b2a0458c0e0cdf615ab10, type: 3}
       propertyPath: retreatRange
       value: 1
       objectReference: {fileID: 0}
@@ -5671,7 +5691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8786958640624122027, guid: f53be620515b2a0458c0e0cdf615ab10, type: 3}
       propertyPath: animationDelay
-      value: 0.2
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8786958640624122027, guid: f53be620515b2a0458c0e0cdf615ab10, type: 3}
       propertyPath: moveTowardRange

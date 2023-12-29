@@ -143,6 +143,9 @@ public class ShootRetreat : MonoBehaviour
         // Apply velocity to the bullet's Rigidbody2D
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction * bulletSpeed;
+
+        //destory bullet after 10 seconds if not already destroyed
+        Destroy(bullet,10f);
     }
     public void TakeDamage(float dmg)
     {

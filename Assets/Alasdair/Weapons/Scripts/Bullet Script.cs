@@ -4,29 +4,66 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    private FollowEnemy goblin;
-    private ShootRetreat storm;
+    private FollowEnemy followEnemy;
+    private ShootRetreat shootRetreatEnemy;
     public float damage;
-    
+
+    ArrayList shootRetreatEnemyTags = new ArrayList();
+    ArrayList followEnemyTags = new ArrayList();
+
+    private void Start()
+    {
+        shootRetreatEnemyTags.Add("StormGhost");
+        shootRetreatEnemyTags.Add("FireGhost");
+
+        followEnemyTags.Add("FireBunny");
+        followEnemyTags.Add("Goblin");
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("ENEMY HIT");
-        // Check if the bullet has collided with an enemy
-        if (other.tag == "Enemy")
+
+        // Check if the collided object has one of the ShootRetreatEnemy tags
+        foreach (string tag in shootRetreatEnemyTags)
         {
-            Debug.Log("Enemy hit!");
-            goblin = other.GetComponent<FollowEnemy>();
-            if (goblin == null)
+            if (other.tag == tag)
             {
-                storm = other.GetComponent<ShootRetreat>();
-                storm.TakeDamage(damage);
+                Debug.Log(tag + " hit!");
+
+                shootRetreatEnemy = other.GetComponent<ShootRetreat>();
+                if (shootRetreatEnemy != null)
+                {
+                    shootRetreatEnemy.TakeDamage(damage);
+                }
+
+                // Destroy the bullet
+                Destroy(gameObject);
+
+                // Exit the loop as the relevant action has been taken
+                return;
             }
-            else
+        }
+
+        // Check if the collided object has one of the FollowEnemy tags
+        foreach (string tag in followEnemyTags)
+        {
+            if (other.tag == tag)
             {
-                goblin.TakeDamage(damage);
+                Debug.Log(tag + " hit!");
+
+                followEnemy = other.GetComponent<FollowEnemy>();
+                if (followEnemy != null)
+                {
+                    followEnemy.TakeDamage(damage);
+                }
+
+                // Destroy the bullet
+                Destroy(gameObject);
+
+                // Exit the loop as the relevant action has been taken
+                return;
             }
-            // Destroy the bullet
-            Destroy(gameObject);
         }
     }
 }

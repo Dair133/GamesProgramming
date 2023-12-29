@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 217854111855989458}
   - component: {fileID: -1907247255181111515}
   - component: {fileID: 4547568535561138578}
-  - component: {fileID: -2908955555939170038}
+  - component: {fileID: 6286614220513248429}
   m_Layer: 0
   m_Name: Rifle
   m_TagString: LargeWeapon
@@ -201,15 +201,13 @@ MonoBehaviour:
   bulletSpeed: 50
   fireRate: 0.2
   bulletOffset: {x: 0, y: 1, z: 0}
---- !u!58 &-2908955555939170038
-CircleCollider2D:
+--- !u!65 &6286614220513248429
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411404600623326008}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -218,21 +216,9 @@ CircleCollider2D:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.5241832, y: 0.19532055}
-  serializedVersion: 2
-  m_Radius: 0.8
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.49, y: 0.7, z: 0}
+  m_Center: {x: 0.5241832, y: -0.09, z: 0}

@@ -12,8 +12,17 @@ public class UIManager : MonoBehaviour
     public int potions;
     
     public TextMeshProUGUI potionText;
-    
+   
+    private PlayerScripts playerHealthScript;
     // Update is called once per frame
+
+    private void Start()
+    {
+        GameObject player;
+        player = GameObject.FindGameObjectWithTag("PlayerTag");
+        playerHealthScript = player.GetComponent<PlayerScripts>();
+    }
+
     void Update()
     {
         //Health Controls
@@ -24,6 +33,10 @@ public class UIManager : MonoBehaviour
         //Use a potion
         if (Input.GetKeyDown(KeyCode.Space) && potions >= 1 && health < 100) 
         {
+            //updates the actual player class with correct health value
+            playerHealthScript.Heal(5);
+
+            //reflects new health in UI for user
             heal(5);
             potions -= 1;
             potionText.text = "x" + potions;

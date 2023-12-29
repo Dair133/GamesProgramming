@@ -105,6 +105,8 @@ public class itemMovememnt : MonoBehaviour
         Vector3 weaponToMouse = mousePosition - weaponObject.transform.position;
         float weaponMouseAngle = Mathf.Atan2(weaponToMouse.y, weaponToMouse.x) * Mathf.Rad2Deg;
 
+        angle = Mathf.RoundToInt(angle);
+
         /*LEFT
          * WEAPON MOVEMENT FOR WHEN CHARACTER IS FACING LEFT
          */
@@ -121,7 +123,7 @@ public class itemMovememnt : MonoBehaviour
             previousClip = 0;
 
 
-            if (angle >= 110 || angle <= -105)
+            if (angle >= 90 || angle <= -90)
             {
 
                 //we can put this here because weapon is NEVER flipped when character is facing left
@@ -164,7 +166,7 @@ public class itemMovememnt : MonoBehaviour
             previousClip = 0;
 
 
-            if (angle < 75 && angle >= -75)
+            if (angle < 90 && angle >= -90)
             {
                 //we can put this here because weapon is ALWAYS flipped when character is facing right
                 weaponSprite.flipY = false;
@@ -208,7 +210,7 @@ public class itemMovememnt : MonoBehaviour
             previousClip = 0;
             weaponSprite.sortingOrder = -2;
 
-            if (angle <= 90 && angle > 15)
+            if (angle <= 90 && angle > 0)
             {
 
                 weaponSprite.flipY = false;
@@ -221,7 +223,7 @@ public class itemMovememnt : MonoBehaviour
 
                 lastMousePosition = mousePos;
             }
-            else if (angle > 90 && angle < 175)
+            else if (angle > 90 && angle < 180)
             {
 
                 weaponSprite.flipY = true;
@@ -267,7 +269,7 @@ public class itemMovememnt : MonoBehaviour
                 weaponSprite.sortingOrder = 3;
             }
             previousClip = 0;
-            if (angle <= 0 && angle >= -165)
+            if (angle <= 10 && angle >= -175)
             {
                // Debug.Log("angle: " + angle + "Weapon angle" + weaponMouseAngle);
                 // Calculate the x position offset based on the angle, let's say it moves between -0.3 and 0.3
