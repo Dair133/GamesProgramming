@@ -30,9 +30,9 @@ public class GameManager : MonoBehaviour
         playerInstance = GameObject.FindGameObjectWithTag("PlayerTag");
         if (playerInstance == null)
         {
-            Debug.Log("NULL PLAYER");
+           // Debug.Log("NULL PLAYER");
         }
-        Debug.Log("INVENTORY MANAGER"+previousItemSelected+"itemSelected"+itemSelected);
+        //Debug.Log("INVENTORY MANAGER"+previousItemSelected+"itemSelected"+itemSelected);
    
        if(previousItemSelected != itemSelected)
         {
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     void loadSelectedItem()
     {
-        Debug.Log("managing inventory");
+       // Debug.Log("managing inventory");
         Vector3 originalObjectScale;
         //oiginal rotation
         Quaternion originalObjectRotation;

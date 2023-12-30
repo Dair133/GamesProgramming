@@ -63,9 +63,16 @@ public class PlayerController : MonoBehaviour
                 targetPos.x += input.x / 10;
                 targetPos.y += input.y / 10;
 
-                
-
-                StartCoroutine(Move(targetPos));
+                Debug.Log(targetPos.ToString() + transform.position.x);
+                if (Vector3.Distance(transform.position, targetPos) > 2f)
+                {
+                    Debug.Log("YILED YIELD YILED");
+                    return;
+                }
+                else
+                {
+                    StartCoroutine(Move(targetPos));
+                }
             }
             else
             {
@@ -83,12 +90,26 @@ public class PlayerController : MonoBehaviour
     
     IEnumerator Move(Vector3 targetPos)
     {
+        int i = 0;
         isMoving = true;
 
+        
         while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-            yield return null;
+            
+            i++;
+            if(i < 3)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+                yield return null;
+            }
+            else
+            {
+                isMoving = false;
+                yield break;
+            }
+            Debug.Log(i);
+    
         }
 
         transform.position = targetPos;
@@ -130,7 +151,7 @@ public class PlayerController : MonoBehaviour
         //maybe transfer this section of code to player controller?
         if (heldItemObject.tag.Equals("LargeWeapon"))
         {
-            Debug.Log("coohsing");
+            //Debug.Log("coohsing");
             //Debug.Log("Holding large weapon");
             isHoldingLargeWeapon = true;
             isHoldingObject = false;

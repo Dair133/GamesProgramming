@@ -12,6 +12,7 @@ public class CaveEntranceTeleporter : MonoBehaviour
         if (collision.CompareTag("PlayerTag")) // Ensure your player GameObject has the "Player" tag
         {
             collision.transform.position = teleportDestination; // Teleport the player
+           
         }
     }
 }
