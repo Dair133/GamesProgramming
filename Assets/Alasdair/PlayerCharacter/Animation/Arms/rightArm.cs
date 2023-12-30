@@ -61,7 +61,7 @@ public class rightArm : MonoBehaviour
         //originalPosition = transform.localPosition;
         Vector3 mousePos = Input.mousePosition;
 
-        heldItemTransform = playerTransform.GetChild(3);
+        heldItemTransform = playerTransform.GetChild(4);
     
         heldItemObject = heldItemTransform.gameObject;
 
