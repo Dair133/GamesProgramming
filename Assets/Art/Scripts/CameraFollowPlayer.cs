@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class CameraFollowPlayer : MonoBehaviour
 {
-    public Transform playerTransform;
-    public Vector3 offset;
-    public float smoothTime = 0.3f;
-
-    private Vector3 velocity = Vector3.zero;
-
-    private void Update()
+    public Transform target;
+    public float offsetz;
+    void LateUpdate()
     {
-        Vector3 targetPosition = playerTransform.position + offset;
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+        if (target == null)
+        { 
+            target = FindPlayer();
+        }
+        transform.position = new Vector3(target.position.x, target.position.y, offsetz);
+    }
+
+    Transform FindPlayer()
+    {
+        return GameObject.FindWithTag("PlayerTag").transform;
     }
 }
