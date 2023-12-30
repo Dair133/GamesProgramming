@@ -421,11 +421,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12c44d3854cd2be48a3445510d44d8e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 25
+  moveSpeed: 35
   isMoving: 0
   input: {x: 0, y: 0}
   head: {fileID: 514050171254992065}
-  isHoldingLargeWeapon: 0
+  isHoldingLargeWeapon: 1
   isHoldingObject: 0
   isHoldingMeleeWeapon: 0
   isHoldingNothing: 0

@@ -37,6 +37,10 @@ public class leftArm : MonoBehaviour
         originalPosition = transform.localPosition;
         headSprite = head.GetComponent<SpriteRenderer>();
         playerControllerScript = transform.parent.GetComponent<PlayerController>();
+        if(playerControllerScript == null)
+        {
+            Debug.LogError("NULL PLAYER CONTROLLER SCRIPTS");
+        }
         previousClip = playerControllerScript.InitializeClip();
     }
     void Update()

@@ -9,7 +9,7 @@ public class CaveEntranceTeleporter : MonoBehaviour
     private void OnTriggerEnter2D(UnityEngine.Collider2D collision)
     {
         Debug.Log("Collider triggered");
-        if (collision.CompareTag("Player")) // Ensure your player GameObject has the "Player" tag
+        if (collision.CompareTag("PlayerTag")) // Ensure your player GameObject has the "Player" tag
         {
             collision.transform.position = teleportDestination; // Teleport the player
         }

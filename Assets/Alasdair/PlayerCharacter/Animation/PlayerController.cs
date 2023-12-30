@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     private string clipName;
     public GameObject head;
+
     SpriteRenderer headSprite;
 
     [Header("Bools for selecting animation")]
@@ -129,6 +130,7 @@ public class PlayerController : MonoBehaviour
         //maybe transfer this section of code to player controller?
         if (heldItemObject.tag.Equals("LargeWeapon"))
         {
+            Debug.Log("coohsing");
             //Debug.Log("Holding large weapon");
             isHoldingLargeWeapon = true;
             isHoldingObject = false;
