@@ -389,7 +389,7 @@ MonoBehaviour:
   speed: 0
   target: {fileID: 0}
   AggroRange: 18.9
-  stopRange: 4
+  stopRange: 1
   enemyAnimator: {fileID: 0}
   damage: 2
   healthBar: {fileID: 0}

@@ -35,6 +35,10 @@ public class FollowEnemy : MonoBehaviour
     }
     void Update()
     {
+        FollowAttackTarget();
+    }
+    void FollowAttackTarget()
+    {
         steeringForce = Vector2.zero;
 
         if (target == null)
@@ -57,7 +61,7 @@ public class FollowEnemy : MonoBehaviour
 
                 if (hit.collider != null && hit.collider.tag == "Wall")
                 {
-                   // Debug.Log("Wall detected!");
+                    // Debug.Log("Wall detected!");
                     // Steering away from the wall by reversing the ray direction
                     steeringForce -= rayDirection * 0.5f;
                 }
@@ -76,19 +80,23 @@ public class FollowEnemy : MonoBehaviour
                 enemyAnimator.SetBool("isMoving", true);
                 enemyAnimator.SetBool("isAttacking", false);
             }
-            else
+            else if(distanceToPlayer < AggroRange)
             {
-               // if (Time.time - lastAttackTime >= 0.1f)
-               // {
-                    Debug.Log("STARTING ATTACK"+distanceToPlayer);
-                    StartCoroutine(damagePlayer(damage));
+                // if (Time.time - lastAttackTime >= 0.1f)
+                // {
+                Debug.Log("STARTING ATTACK" + distanceToPlayer);
+                StartCoroutine(damagePlayer(damage));
                 //}
                 enemyAnimator.SetBool("isMoving", false);
                 enemyAnimator.SetBool("isAttacking", true);
             }
 
         }
+
+
+
     }
+
     public void TakeDamage(float dmg)
     {
         health -= dmg;
