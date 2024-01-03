@@ -104,15 +104,15 @@ public class FollowEnemy : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            GameObject coin = Instantiate(Resources.Load<GameObject>("Coin"), transform.position, Quaternion.identity);
+            //Gold worth from Goblins
+            coin.GetComponent<CoinPickup>().value = 5;
         }
     }
     IEnumerator damagePlayer(float dmg)
     {
-
-        
         dealDamageToPlayer(dmg);
         yield return null;
-       
     }
     void dealDamageToPlayer(float dmg)
     {

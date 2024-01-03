@@ -154,6 +154,9 @@ public class ShootRetreat : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            GameObject coin = Instantiate(Resources.Load<GameObject>("Coin"), transform.position, Quaternion.identity);
+            //Gold worth from Flyie Shooties
+            coin.GetComponent<CoinPickup>().value = 10;
         }
     }
 }

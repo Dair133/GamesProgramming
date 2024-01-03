@@ -7,14 +7,14 @@ public class UIManager : MonoBehaviour
     //Health variables
     public Image healthBar;
     public float health = 100f;
+    private PlayerScripts playerHealthScript;
     
     //Potion variables
     public int potions;
-    
     public TextMeshProUGUI potionText;
-   
-    private PlayerScripts playerHealthScript;
-    // Update is called once per frame
+    
+    //Gold variables
+    public TextMeshProUGUI goldText;
 
     private void Start()
     {
@@ -59,5 +59,11 @@ public class UIManager : MonoBehaviour
         health += amt;
         health = Mathf.Clamp(health, 0, 100);
         healthBar.fillAmount = health / 100f;
+    }
+    
+    //Coin options
+    public void updateCoins(int coins)
+    {
+        goldText.text = coins.ToString();
     }
 }
