@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using static UnityEngine.GraphicsBuffer;
-
 public class FinalBoss : MonoBehaviour
 {
     //melee variables
@@ -28,7 +28,12 @@ public class FinalBoss : MonoBehaviour
     public float moveTowardRange;//how far away must player be for enemy to start moving toward
     public float retreatRange;//how close must the player be for enemy to retreat
 
-    public GameObject bulletPrefab;
+    private GameObject bulletPrefab;
+    public GameObject bulletPrefabOne;
+    public GameObject bulletPrefabTwo;
+    public GameObject bulletPrefabThree;
+
+
     public float bulletSpeed = 20f;
     public float shootInterval = 3f;//how many times enemy shoots per second
     private float nextShootTime;
@@ -39,6 +44,8 @@ public class FinalBoss : MonoBehaviour
     public float shootDelay;//dont edit unless know what it does can make animations weird
     public float animationDelay;
 
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
 
     private float shootingAnimationEndTime;
 
@@ -61,22 +68,25 @@ public class FinalBoss : MonoBehaviour
         enemyAnimator.SetBool("phaseTwo", false);
 
 
-        followSpeed = 7;
-        retreatSpeed = 8;
-        nextShootTime = Time.time;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
+        nextShootTime = shootDelay;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(health);
         if(health > 50)
         {
+            Debug.Log("FINAL BOSS SHOOT");
             enemyAnimator.SetBool("phaseTwo", false);
             MoveAndShoot();
         }
         else if(health <= 50)
         {
             enemyAnimator.SetBool("phaseTwo", true);
+            FollowAttackTarget();
         }
     }
 
@@ -94,23 +104,28 @@ public class FinalBoss : MonoBehaviour
         {
 
             float distanceToPlayer = Vector2.Distance(transform.position, target.position);//calculates distance to player
+            //clamp distance to player
 
+            distanceToPlayer = (float)System.Math.Round(distanceToPlayer);
             if (distanceToPlayer < AggroRange)
             {
+                Debug.Log("Distance is" + distanceToPlayer);
                 //0.8f here stops floating point imprecisions where ghost is retreating one frame and moving towards player next frame despite
                 //being stationery, basically stops weird "vibrating in place" from happening
-                if (distanceToPlayer < retreatRange - 0.8f)
+                if (distanceToPlayer < retreatRange)
                 {
+                    Debug.Log("retreating");
                     enemyAnimator.SetBool("isMoving", true);
                     transform.position = Vector2.MoveTowards(transform.position, target.position, -retreatSpeed * Time.deltaTime);
                 }
                 else if (distanceToPlayer >= moveTowardRange)
                 {
+                    Debug.Log("moving towards");
                     transform.position = Vector2.MoveTowards(transform.position, target.position, followSpeed * Time.deltaTime);
                     enemyAnimator.SetBool("isMoving", true);
                 }
 
-                if (Time.time >= nextShootTime)
+                else if (Time.time >= nextShootTime)
                 {
                     StartCoroutine(PlayShootingAnimation(animationDelay, true));
                     Vector2 rayStart = transform.position + (target.position - transform.position).normalized * -0.5f;
@@ -118,6 +133,7 @@ public class FinalBoss : MonoBehaviour
 
                     if (hit.collider != null)//if enemy finds something to shoot at
                     {
+                        enemyAnimator.SetBool("isMoving", false);
                         //Shoot is only a coroutine to make sure shooting and animation are synced properly.
                         StartCoroutine(DelayedShoot(shootDelay));
                         nextShootTime = Time.time + shootInterval;
@@ -130,7 +146,10 @@ public class FinalBoss : MonoBehaviour
                 }
 
             }
-            enemyAnimator.SetBool("isMoving", false);
+            else//Boss should never move if outside aggor range of player
+            {
+                enemyAnimator.SetBool("isMoving", false);
+            }
         }
 
 
@@ -147,6 +166,7 @@ public class FinalBoss : MonoBehaviour
     }
     void setShooting(bool setShooting)
     {
+        
         enemyAnimator.SetBool("isShooting", setShooting);
     }
     void Shoot()
@@ -159,6 +179,27 @@ public class FinalBoss : MonoBehaviour
         // Calculate angle for the bullet's rotation
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
+
+
+        // Create an instance of the Random class
+        System.Random random = new System.Random();
+        
+        // Generate a random number between 1 and 3
+        int randomNumber = random.Next(1, 4);
+        Debug.Log("Random NUmber is" + randomNumber);
+        if(randomNumber == 1)
+        {
+            bulletPrefab = bulletPrefabOne;
+        }
+        else if(randomNumber == 2)
+        {
+            bulletPrefab = bulletPrefabTwo;
+        }
+        else if(randomNumber == 3)
+        {
+            bulletPrefab = bulletPrefabThree;
+        }
+
 
         // Instantiate the bullet with the calculated rotation
         GameObject bullet = Instantiate(bulletPrefab, new Vector3(transform.position.x - BulletSpawnLocationX,
@@ -174,12 +215,21 @@ public class FinalBoss : MonoBehaviour
     }
     public void TakeDamage(float dmg)
     {
+        StartCoroutine(FlashRed());
+        //Debug.Log(health);
         health -= dmg;
-        healthBar.UpdateHealthBar(health);
-        if (health <= 0)
+        //healthBar.UpdateHealthBar(health);
+        if (health <= 0 || health < -100)
         {
+            Debug.Log("DESTORYING BOSS");
             Destroy(gameObject);
         }
+    }
+    private IEnumerator FlashRed()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        spriteRenderer.color = originalColor;
     }
 
     void FollowAttackTarget()

@@ -17,6 +17,7 @@ TagManager:
   - Goblin
   - StormGhost
   - FireGhost
+  - FinalBoss
   layers:
   - Default
   - TransparentFX

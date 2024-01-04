@@ -6,6 +6,7 @@ public class BulletScript : MonoBehaviour
 {
     private FollowEnemy followEnemy;
     private ShootRetreat shootRetreatEnemy;
+    private FinalBoss finalBoss;
     public float damage;
 
     ArrayList shootRetreatEnemyTags = new ArrayList();
@@ -15,6 +16,7 @@ public class BulletScript : MonoBehaviour
     {
         shootRetreatEnemyTags.Add("StormGhost");
         shootRetreatEnemyTags.Add("FireGhost");
+       
 
         followEnemyTags.Add("FireBunny");
         followEnemyTags.Add("Goblin");
@@ -22,7 +24,8 @@ public class BulletScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("ENEMY HIT");
+        //Debug.Log("ENEMY HIT");
+        Debug.Log(other.tag);
 
         // Check if the collided object has one of the ShootRetreatEnemy tags
         foreach (string tag in shootRetreatEnemyTags)
@@ -64,6 +67,19 @@ public class BulletScript : MonoBehaviour
                 // Exit the loop as the relevant action has been taken
                 return;
             }
+        }
+        if(other.tag == "FinalBoss")
+        {
+            finalBoss = other.GetComponent<FinalBoss>();
+            if(finalBoss != null)
+            {
+                finalBoss.TakeDamage(damage);
+            }
+
+            Destroy(gameObject);
+
+
+            return;
         }
     }
 }

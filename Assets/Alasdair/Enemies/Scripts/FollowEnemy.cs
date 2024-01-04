@@ -13,7 +13,12 @@ public class FollowEnemy : MonoBehaviour
     private Vector2 steeringForce;
     public float stopRange = 2f;//how close to the player the enemy should stop moving(prevents enemy literally walking on top of player)
     public Animator enemyAnimator;  // Animator component
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
     //Health Variables
+
+
+
     private float health;
     public float damage = 1;
     [SerializeField] FloatingHealthBar healthBar;
@@ -32,6 +37,8 @@ public class FollowEnemy : MonoBehaviour
         {
             damage = 2;
         }
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
     }
     void Update()
     {
@@ -99,12 +106,19 @@ public class FollowEnemy : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
+        StartCoroutine(FlashRed());
         health -= dmg;
         healthBar.UpdateHealthBar(health);
         if (health <= 0)
         {
             Destroy(gameObject);
         }
+    }
+    private IEnumerator FlashRed()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        spriteRenderer.color = originalColor;
     }
     IEnumerator damagePlayer(float dmg)
     {
@@ -114,6 +128,7 @@ public class FollowEnemy : MonoBehaviour
         yield return null;
        
     }
+
     void dealDamageToPlayer(float dmg)
     {
        

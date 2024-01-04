@@ -25,7 +25,8 @@ public class ShootRetreat : MonoBehaviour
     public float shootDelay;//dont edit unless know what it does can make animations weird
     public float animationDelay;
 
-
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
     private float shootingAnimationEndTime;
 
     //Health Variables
@@ -47,6 +48,8 @@ public class ShootRetreat : MonoBehaviour
         followSpeed = 7;
         retreatSpeed = 8;
         nextShootTime = Time.time;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
     }
 
     // Update is called once per frame
@@ -149,11 +152,18 @@ public class ShootRetreat : MonoBehaviour
     }
     public void TakeDamage(float dmg)
     {
+        StartCoroutine(FlashRed());
         health -= dmg;
         healthBar.UpdateHealthBar(health);
         if (health <= 0)
         {
             Destroy(gameObject);
         }
+    }
+    private IEnumerator FlashRed()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        spriteRenderer.color = originalColor;
     }
 }
