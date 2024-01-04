@@ -9,34 +9,34 @@ public class PlayerScripts : MonoBehaviour
 
     private bool isInvulnerable = false;
 
+    private GameObject UI;
+    private UIManager manager;
+
+    private int coins;
+
     // Start is called before the first frame update
     void Start()
     {
+        UI = GameObject.FindGameObjectWithTag("InventoryUI");
+        manager = UI.GetComponent<UIManager>();
+        
         if (playerHealth == -1)
         {
             playerHealth = 100; // sets hp to 100 if not set manually
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 
     public void TakeDamage(float damage)
     {
         if (!isInvulnerable)
         {
             playerHealth -= damage;
-            // Call function to update UI
-            GameObject UI = GameObject.FindGameObjectWithTag("InventoryUI");
-            UIManager uiManager = UI.GetComponent<UIManager>();
             if (UI != null)
             {
                 Debug.Log("TAKING DAMAGE: " + playerHealth);
                 // Updates UI to reflect damage taken
-                uiManager.takeDamage(damage);
+                manager.takeDamage(damage);
             }
 
             if (playerHealth <= 0)
@@ -58,5 +58,12 @@ public class PlayerScripts : MonoBehaviour
     public void Heal(float healingAmount)
     {
         playerHealth += healingAmount;
+    }
+    
+    //Gold pickup function
+    public void goldPickup(int amount)
+    {
+        coins += amount;
+        manager.updateCoins(coins);
     }
 }

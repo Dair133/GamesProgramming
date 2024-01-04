@@ -32,13 +32,5 @@ public class PanelColorController : MonoBehaviour
         {
             ChangePanelColor(0);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            ChangePanelColor(1);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            ChangePanelColor(2);
-        }
     }
 }
