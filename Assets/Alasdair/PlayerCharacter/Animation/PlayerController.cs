@@ -17,6 +17,16 @@ public class PlayerController : MonoBehaviour
     private string clipName;
     public GameObject head;
 
+    private AudioSource audio;
+    public AudioClip grassWalkOne;
+    public AudioClip grassWalkTwo;
+    private AudioClip walkingSoundChosen;
+    private bool grass;
+    private bool stone;
+    private bool walkSoundPlayed;
+ 
+
+
     SpriteRenderer headSprite;
 
     [Header("Bools for selecting animation")]
@@ -27,6 +37,10 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        grass = true;
+        stone = false;
+        walkSoundPlayed = false;
+        audio = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         headSprite = head.GetComponent<SpriteRenderer>();
 
@@ -35,6 +49,23 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        //which walking sound will we choose
+        if (grass)
+        {
+            float randomValue = Random.value;
+            if (randomValue < 0.7f)
+            {
+
+                walkingSoundChosen = grassWalkOne;
+            }
+            else
+            {
+                walkingSoundChosen = grassWalkTwo;
+            }
+        }
+
+
+
         clipName = headSprite.sprite.name;
         if (!isMoving)
         {
@@ -71,6 +102,12 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
+                    if (!walkSoundPlayed)
+                    {
+                        walkSoundPlayed = true;
+                        StartCoroutine(playWalkSound(walkingSoundChosen));
+                    }
+                   
                     StartCoroutine(Move(targetPos));
                 }
             }
@@ -114,6 +151,14 @@ public class PlayerController : MonoBehaviour
 
         transform.position = targetPos;
         isMoving = false;
+    }
+    IEnumerator playWalkSound(AudioClip clip)
+    {
+        
+        audio.PlayOneShot(clip);
+        yield return new WaitForSeconds(0.4f);
+        walkSoundPlayed = false;
+        
     }
      public int InitializeClip()
     {

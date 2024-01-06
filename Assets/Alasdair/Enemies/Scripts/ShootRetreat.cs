@@ -25,6 +25,9 @@ public class ShootRetreat : MonoBehaviour
     public float shootDelay;//dont edit unless know what it does can make animations weird
     public float animationDelay;
 
+
+
+    public GameObject deathSound;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     private float shootingAnimationEndTime;
@@ -158,6 +161,8 @@ public class ShootRetreat : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            GameObject deathSoundRef = GameObject.Instantiate(deathSound);
+            Destroy(deathSoundRef, 5f);
             GameObject coin = Instantiate(Resources.Load<GameObject>("Coin"), transform.position, Quaternion.identity);
             //Gold worth from Flyie Shooties
             coin.GetComponent<CoinPickup>().value = 10;
