@@ -76,10 +76,8 @@ public class FinalBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(health);
         if(health > 50)
         {
-            Debug.Log("FINAL BOSS SHOOT");
             enemyAnimator.SetBool("phaseTwo", false);
             MoveAndShoot();
         }
@@ -109,18 +107,15 @@ public class FinalBoss : MonoBehaviour
             distanceToPlayer = (float)System.Math.Round(distanceToPlayer);
             if (distanceToPlayer < AggroRange)
             {
-                Debug.Log("Distance is" + distanceToPlayer);
                 //0.8f here stops floating point imprecisions where ghost is retreating one frame and moving towards player next frame despite
                 //being stationery, basically stops weird "vibrating in place" from happening
                 if (distanceToPlayer < retreatRange)
                 {
-                    Debug.Log("retreating");
                     enemyAnimator.SetBool("isMoving", true);
                     transform.position = Vector2.MoveTowards(transform.position, target.position, -retreatSpeed * Time.deltaTime);
                 }
                 else if (distanceToPlayer >= moveTowardRange)
                 {
-                    Debug.Log("moving towards");
                     transform.position = Vector2.MoveTowards(transform.position, target.position, followSpeed * Time.deltaTime);
                     enemyAnimator.SetBool("isMoving", true);
                 }
@@ -171,8 +166,6 @@ public class FinalBoss : MonoBehaviour
     }
     void Shoot()
     {
-        Debug.Log("Shooting the spell");
-
         // Calculate direction from enemy to target
         Vector2 direction = (target.position - transform.position).normalized;
 
@@ -186,7 +179,6 @@ public class FinalBoss : MonoBehaviour
         
         // Generate a random number between 1 and 3
         int randomNumber = random.Next(1, 4);
-        Debug.Log("Random NUmber is" + randomNumber);
         if(randomNumber == 1)
         {
             bulletPrefab = bulletPrefabOne;
@@ -221,7 +213,6 @@ public class FinalBoss : MonoBehaviour
         //healthBar.UpdateHealthBar(health);
         if (health <= 0 || health < -100)
         {
-            Debug.Log("DESTORYING BOSS");
             Destroy(gameObject);
         }
     }
@@ -270,7 +261,6 @@ public class FinalBoss : MonoBehaviour
             // Move toward the player while avoiding the walls
             if (distanceToPlayer < AggroRange && distanceToPlayer > 1.0f && distanceToPlayer > stopRange)
             {
-                Debug.Log(distanceToPlayer);
                 transform.position = Vector2.MoveTowards(transform.position, (Vector2)transform.position + desiredDirection, speed * Time.deltaTime);
                 enemyAnimator.SetBool("isMoving", true);
                 enemyAnimator.SetBool("isAttacking", false);
@@ -279,7 +269,6 @@ public class FinalBoss : MonoBehaviour
             {
                 // if (Time.time - lastAttackTime >= 0.1f)
                 // {
-                Debug.Log("STARTING ATTACK" + distanceToPlayer);
                 StartCoroutine(damagePlayer(meleeDamage));
                 //}
                 enemyAnimator.SetBool("isMoving", false);

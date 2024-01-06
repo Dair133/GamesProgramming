@@ -62,11 +62,9 @@ public class PlayerController : MonoBehaviour
                 var targetPos = transform.position;
                 targetPos.x += input.x / 10;
                 targetPos.y += input.y / 10;
-
-                Debug.Log(targetPos.ToString() + transform.position.x);
+                
                 if (Vector3.Distance(transform.position, targetPos) > 2f)
                 {
-                    Debug.Log("YILED YIELD YILED");
                     return;
                 }
                 else
@@ -108,8 +106,6 @@ public class PlayerController : MonoBehaviour
                 isMoving = false;
                 yield break;
             }
-            Debug.Log(i);
-    
         }
 
         transform.position = targetPos;

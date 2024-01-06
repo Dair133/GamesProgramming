@@ -129,7 +129,6 @@ public class ShootRetreat : MonoBehaviour
     }
     void Shoot()
     {
-        Debug.Log("Shooting the spell");
 
         // Calculate direction from enemy to target
         Vector2 direction = (target.position - transform.position).normalized;

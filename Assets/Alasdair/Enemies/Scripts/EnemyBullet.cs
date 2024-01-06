@@ -22,12 +22,9 @@ public class EnemyBullet : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("INSIDE ENEMEY BULLET "+other.tag);
         // Check if the bullet has collided with an enemy
         if (other.tag.Equals("PlayerTag"))
         {
-            Debug.Log("Player Hit");
-
             //gets script from player which handles damage and healing(not supposed to be named
             //"playerScripts" but changing it causes errors
             PlayerScripts dmgScript = other.GetComponent<PlayerScripts>();

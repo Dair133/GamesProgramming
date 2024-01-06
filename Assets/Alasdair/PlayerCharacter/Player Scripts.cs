@@ -34,7 +34,6 @@ public class PlayerScripts : MonoBehaviour
             playerHealth -= damage;
             if (UI != null)
             {
-                Debug.Log("TAKING DAMAGE: " + playerHealth);
                 // Updates UI to reflect damage taken
                 manager.takeDamage(damage);
             }

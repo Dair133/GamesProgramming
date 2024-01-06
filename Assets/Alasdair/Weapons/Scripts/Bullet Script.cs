@@ -25,15 +25,12 @@ public class BulletScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("ENEMY HIT");
-        Debug.Log(other.tag);
 
         // Check if the collided object has one of the ShootRetreatEnemy tags
         foreach (string tag in shootRetreatEnemyTags)
         {
             if (other.tag == tag)
             {
-                Debug.Log(tag + " hit!");
-
                 shootRetreatEnemy = other.GetComponent<ShootRetreat>();
                 if (shootRetreatEnemy != null)
                 {
@@ -53,8 +50,6 @@ public class BulletScript : MonoBehaviour
         {
             if (other.tag == tag)
             {
-                Debug.Log(tag + " hit!");
-
                 followEnemy = other.GetComponent<FollowEnemy>();
                 if (followEnemy != null)
                 {

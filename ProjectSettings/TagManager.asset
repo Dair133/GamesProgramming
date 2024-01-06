@@ -18,6 +18,8 @@ TagManager:
   - StormGhost
   - FireGhost
   - FinalBoss
+  - Merchant
+  - ShopUI
   layers:
   - Default
   - TransparentFX
