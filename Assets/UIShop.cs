@@ -1,55 +1,73 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 public class UIShop : MonoBehaviour
 {
-    private Transform player;
+    private GameObject player;
     public Transform merchant;
     public GameObject UIShopComponent;
-    
 
-     void Update()
+    private GameObject success;
+    private GameObject failure;
+
+    void Start()
+    {
+        success = GameObject.FindGameObjectWithTag("Success");
+        failure = GameObject.FindGameObjectWithTag("Failure");
+        UIShopComponent.SetActive(false);
+        success.SetActive(false);
+        failure.SetActive(false);
+    }
+
+    void Update()
     {
         if (player == null)
-        { 
+        {
             player = FindPlayer();
         }
-        
-        float distance = Vector3.Distance(player.position, merchant.position);
-        Debug.Log("FAR AWAY: "+distance);
-        
-        if (distance <= 4f)
+
+        if (checkRange())
         {
-            // Activate the UI component
             UIShopComponent.SetActive(true);
-        }
-        else
-        {
-            // Deactivate the UI component
-            UIShopComponent.SetActive(false);
-        }
-
-        if (Input.GetMouseButtonDown(0)) // 0 means left mouse button, change as needed
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
+            if (Input.GetKeyDown(KeyCode.T) && UIShopComponent.activeSelf)
             {
-                if (hit.collider != null && hit.collider.gameObject == gameObject)
+                int coins = player.GetComponent<PlayerScripts>().getCoins();
+                if (coins >= 10)
                 {
-                    // Your code to handle the click goes here
-                    Debug.Log("UI Clicked!");
+                    failure.SetActive(false);
+                    UIShopComponent.GetComponentInParent<UIManager>().addPotion();
+                    player.GetComponent<PlayerScripts>().goldPickup(-10);
+                    Debug.Log("Success");
+                    success.SetActive(true);
+                }
+                else
+                {
+                    success.SetActive(false);
+                    Debug.Log("Failure");
+                    failure.SetActive(true);
                 }
             }
         }
+        else
+        {
+            failure.SetActive(false);
+            success.SetActive(false);
+            UIShopComponent.SetActive(false);
+        }
     }
-     
-     Transform FindPlayer()
-     {
-         return GameObject.FindWithTag("PlayerTag").transform;
-     }
+
+    GameObject FindPlayer()
+    {
+        return GameObject.FindWithTag("PlayerTag");
+    }
+
+    bool checkRange()
+    {
+        float distance = Vector3.Distance(player.transform.position, merchant.position);
+        return distance <= 4f;
+    }
 }

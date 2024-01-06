@@ -65,4 +65,9 @@ public class PlayerScripts : MonoBehaviour
         coins += amount;
         manager.updateCoins(coins);
     }
+
+    public int getCoins()
+    {
+        return coins;
+    }
 }

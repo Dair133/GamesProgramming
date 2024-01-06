@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
             //reflects new health in UI for user
             heal(5);
             potions -= 1;
-            potionText.text = "x" + potions;
+            updatePotions();
         }
         if(Input.GetKeyDown(KeyCode.Minus))
         {
@@ -65,5 +65,16 @@ public class UIManager : MonoBehaviour
     public void updateCoins(int coins)
     {
         goldText.text = coins.ToString();
+    }
+
+    public void addPotion()
+    {
+        potions += 1;
+        updatePotions();
+    }
+
+    public void updatePotions()
+    {
+        potionText.text = "x" + potions;
     }
 }
