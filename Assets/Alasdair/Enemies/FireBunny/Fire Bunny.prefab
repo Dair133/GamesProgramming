@@ -389,6 +389,7 @@ MonoBehaviour:
   speed: 0
   target: {fileID: 0}
   AggroRange: 18.9
+  deathSound: {fileID: 3050547996208575273, guid: 716bbad8ef4008b4f922112b84df3ee1, type: 3}
   stopRange: 1
   enemyAnimator: {fileID: 0}
   damage: 2

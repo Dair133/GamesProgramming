@@ -10,6 +10,8 @@ public class FollowEnemy : MonoBehaviour
     public float speed;
     public Transform target;
     public float AggroRange;
+
+    public GameObject deathSound;
     private Vector2 steeringForce;
     public float stopRange = 2f;//how close to the player the enemy should stop moving(prevents enemy literally walking on top of player)
     public Animator enemyAnimator;  // Animator component
@@ -112,6 +114,8 @@ public class FollowEnemy : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            GameObject deathSoundRef = GameObject.Instantiate(deathSound);
+            Destroy(deathSoundRef, 5f);
             GameObject coin = Instantiate(Resources.Load<GameObject>("Coin"), transform.position, Quaternion.identity);
             //Gold worth from Goblins
             coin.GetComponent<CoinPickup>().value = 5;
