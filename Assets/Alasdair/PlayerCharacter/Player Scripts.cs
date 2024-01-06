@@ -9,14 +9,20 @@ public class PlayerScripts : MonoBehaviour
 
     private bool isInvulnerable = false;
 
+    //flashing red variables
+
+
+
     private GameObject UI;
     private UIManager manager;
-
+    private AudioSource audioSource;
+    public AudioClip takeDamageSound;
     private int coins;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         UI = GameObject.FindGameObjectWithTag("InventoryUI");
         manager = UI.GetComponent<UIManager>();
         
@@ -34,8 +40,10 @@ public class PlayerScripts : MonoBehaviour
             playerHealth -= damage;
             if (UI != null)
             {
+                audioSource.PlayOneShot(takeDamageSound);
                 Debug.Log("TAKING DAMAGE: " + playerHealth);
                 // Updates UI to reflect damage taken
+
                 manager.takeDamage(damage);
             }
 

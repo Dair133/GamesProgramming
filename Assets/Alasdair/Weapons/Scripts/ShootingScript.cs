@@ -80,13 +80,13 @@ public class ShootingScript : MonoBehaviour
         {
             audioSource.PlayOneShot(primaryShootingSound);
         }
-        else // 10% chance to play one of the variations
-        {
-            //add flash to gun here maybe?
-            AudioClip[] variations = new AudioClip[] { shootingVariationOne };
-            int randomIndex = Random.Range(0, variations.Length);
-            audioSource.PlayOneShot(variations[randomIndex]);
-        }
+        //else // 10% chance to play one of the variations
+        //{
+        //    //add flash to gun here maybe?
+        //    AudioClip[] variations = new AudioClip[] { shootingVariationOne };
+        //    int randomIndex = Random.Range(0, variations.Length);
+        //    audioSource.PlayOneShot(variations[randomIndex]);
+        //}
 
     }
 

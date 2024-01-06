@@ -5,9 +5,14 @@ using UnityEngine;
 public class EnemyBullet : MonoBehaviour
 {
     public float bulletDamage = -1;
+    
+    private AudioSource bulletSoundSource;
+    public AudioClip bulletSoundClip;
     // Start is called before the first frame update
     void Start()
     {
+        bulletSoundSource = GetComponent<AudioSource>();
+        bulletSoundSource.PlayOneShot(bulletSoundClip);
         //if damage not set in public variable then set it manually
         if(bulletDamage == -1)
         {

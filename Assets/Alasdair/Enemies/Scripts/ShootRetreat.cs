@@ -26,6 +26,7 @@ public class ShootRetreat : MonoBehaviour
     public float animationDelay;
 
 
+ 
 
     public GameObject deathSound;
     private SpriteRenderer spriteRenderer;
@@ -40,6 +41,7 @@ public class ShootRetreat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    
         //Health Variables
         health = 100;
         healthBar = GetComponentInChildren<FloatingHealthBar>();
@@ -100,6 +102,7 @@ public class ShootRetreat : MonoBehaviour
                     if (hit.collider != null)//if enemy finds something to shoot at
                     {
                         //Shoot is only a coroutine to make sure shooting and animation are synced properly.
+                       
                         StartCoroutine(DelayedShoot(shootDelay)); 
                         nextShootTime = Time.time + shootInterval;
                         shootingAnimationEndTime = Time.time + 0.6f; //Ensures that the shooting animation players for at least 0.6 of a second
@@ -119,6 +122,7 @@ public class ShootRetreat : MonoBehaviour
     IEnumerator DelayedShoot(float delay)
     {
         yield return new WaitForSeconds(delay); // Wait for the specified delay
+      
         Shoot();
     }
     IEnumerator PlayShootingAnimation(float delay,bool ShootingBool)

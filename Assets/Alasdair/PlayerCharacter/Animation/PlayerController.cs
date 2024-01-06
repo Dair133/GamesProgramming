@@ -20,9 +20,11 @@ public class PlayerController : MonoBehaviour
     private AudioSource audio;
     public AudioClip grassWalkOne;
     public AudioClip grassWalkTwo;
+    public AudioClip stoneWalkOne;
+    public AudioClip stoneWalkTwo;
     private AudioClip walkingSoundChosen;
-    private bool grass;
-    private bool stone;
+    public bool grass;
+    public bool stone;
     private bool walkSoundPlayed;
  
 
@@ -62,6 +64,19 @@ public class PlayerController : MonoBehaviour
             {
                 walkingSoundChosen = grassWalkTwo;
             }
+        }
+        else if (stone)
+        {
+            float randomValue = Random.value;
+            if (randomValue < 0.7f)
+            {
+                walkingSoundChosen = stoneWalkOne;
+            }
+            else
+            {
+                walkingSoundChosen = stoneWalkTwo; 
+            }
+
         }
 
 
