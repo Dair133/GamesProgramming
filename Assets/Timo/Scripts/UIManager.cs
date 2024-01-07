@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI goldText;
     private AudioSource audioSource;
     public AudioClip potionSound;
+    public AudioClip goldSound;
     private void Start()
     {
         GameObject player;
@@ -68,6 +69,7 @@ public class UIManager : MonoBehaviour
     //Coin options
     public void updateCoins(int coins)
     {
+        audioSource.PlayOneShot(goldSound);
         goldText.text = coins.ToString();
     }
 
