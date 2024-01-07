@@ -26,7 +26,7 @@ public class ShootingScript : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         player = GameObject.FindGameObjectWithTag("PlayerTag");
         playerController = player.GetComponent<PlayerController>();
-        originalMoveSpeed = playerController.moveSpeed;
+        originalMoveSpeed = 35;
 
     }
 
@@ -34,25 +34,19 @@ public class ShootingScript : MonoBehaviour
     void Update()
     {
        
-        if(playerController.moveSpeed == 10)
-        {
-            timeSpeed++;
-            if(timeSpeed > 120)
-            {
-                playerController.moveSpeed = 35;
-            }
-        }
+      
 
         if (Input.GetMouseButton(0))
         {
             Debug.Log("setting slow speed");
-            playerController.moveSpeed = 10;
+            playerController.moveSpeed = 6;
           
         }
         else
         {
             Debug.Log("setting original speed");
-            StartCoroutine(SetOriginaMoveSpeedt());
+            //StartCoroutine(SetOriginaMoveSpeedt());
+            playerController.moveSpeed = 13;
         }
 
 
