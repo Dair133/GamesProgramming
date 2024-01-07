@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScripts : MonoBehaviour
 {
@@ -50,6 +51,7 @@ public class PlayerScripts : MonoBehaviour
             if (playerHealth <= 0)
             {
                 // Do something here upon player death possibly different to how we handle death in UIManager
+                SceneManager.LoadScene("DeathScene");
             }
 
             StartCoroutine(BecomeInvulnerable());

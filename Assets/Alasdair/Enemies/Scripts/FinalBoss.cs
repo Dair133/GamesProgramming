@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using static UnityEngine.GraphicsBuffer;
+using UnityEngine.SceneManagement;
+
 public class FinalBoss : MonoBehaviour
 {
     //melee variables
@@ -214,6 +216,7 @@ public class FinalBoss : MonoBehaviour
         if (health <= 0 || health < -100)
         {
             Destroy(gameObject);
+            SceneManager.LoadScene("WinScene");
         }
     }
     private IEnumerator FlashRed()
