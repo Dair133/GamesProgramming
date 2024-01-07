@@ -75,10 +75,10 @@ public class HeadFollowMouse : MonoBehaviour
 
         }
 
-        //if (Vector3.Distance(lastMousePosition, mousePos) > 0.015f) ;
-        ////do nothing
-        //else
-        //    return;
+        if (Vector3.Distance(lastMousePosition, mousePos) > 0.015f) ;
+        //do nothing
+        else
+            return;
 
         // if (mousePos != lastMousePosition || lastPosition != currentPosition)
         //  {

@@ -511,8 +511,12 @@ MonoBehaviour:
   isMoving: 0
   input: {x: 0, y: 0}
   head: {fileID: 514050171254992065}
-  grassWalkOne: {fileID: 8300000, guid: 11838f2f5e66eff4899505d1e35b4d51, type: 3}
-  grassWalkTwo: {fileID: 8300000, guid: 576c27aa9019d0f4388ece36d663eeb0, type: 3}
+  grassWalkOne: {fileID: 8300000, guid: 0f2663afa06b29a46a15f2e7fcb59eca, type: 3}
+  grassWalkTwo: {fileID: 8300000, guid: f44af4e1df5d1504097669d6a25963b5, type: 3}
+  stoneWalkOne: {fileID: 8300000, guid: 11838f2f5e66eff4899505d1e35b4d51, type: 3}
+  stoneWalkTwo: {fileID: 8300000, guid: 576c27aa9019d0f4388ece36d663eeb0, type: 3}
+  grass: 0
+  stone: 0
   isHoldingLargeWeapon: 1
   isHoldingObject: 0
   isHoldingMeleeWeapon: 1
@@ -578,7 +582,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: -1
-  invulnerabilityTime: 0.4
+  invulnerabilityTime: 0.2
+  takeDamageSound: {fileID: 8300000, guid: 905f056055cdd604ea411cd74ebe3d5f, type: 3}
 --- !u!70 &-7738973751515852886
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
