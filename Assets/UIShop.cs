@@ -68,6 +68,6 @@ public class UIShop : MonoBehaviour
     bool checkRange()
     {
         float distance = Vector3.Distance(player.transform.position, merchant.position);
-        return distance <= 4f;
+        return distance <= 9f;
     }
 }
