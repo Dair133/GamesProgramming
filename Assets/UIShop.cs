@@ -9,6 +9,7 @@ public class UIShop : MonoBehaviour
 {
     private GameObject player;
     public Transform merchant;
+    public Transform merchantTwo;
     public GameObject UIShopComponent;
 
     private GameObject success;
@@ -68,6 +69,7 @@ public class UIShop : MonoBehaviour
     bool checkRange()
     {
         float distance = Vector3.Distance(player.transform.position, merchant.position);
-        return distance <= 9f;
+        float distanceTwo = Vector3.Distance(player.transform.position, merchantTwo.position);
+        return distance <= 9f || distanceTwo <=9f;
     }
 }

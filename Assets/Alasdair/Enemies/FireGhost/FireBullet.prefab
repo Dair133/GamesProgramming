@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78885ee8662ba764c9558daafe38034d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletDamage: 5
+  bulletDamage: 4
   bulletSoundClip: {fileID: 8300000, guid: a080864fe87ecef489141c71b2fb5500, type: 3}
 --- !u!1 &7178131396993126288
 GameObject:
