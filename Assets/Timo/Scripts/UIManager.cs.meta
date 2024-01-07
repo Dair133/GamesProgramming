@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7a22c2d8c911498982c81b54ab6f33a9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - potionSound: {fileID: 8300000, guid: 7609d6d09dad52d47bf6193608d085dc, type: 3}
+  - healthBar: {instanceID: 0}
+  - potionText: {instanceID: 0}
+  - goldText: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
