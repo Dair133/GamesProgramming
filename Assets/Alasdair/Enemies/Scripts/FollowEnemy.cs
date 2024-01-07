@@ -84,7 +84,6 @@ public class FollowEnemy : MonoBehaviour
             // Move toward the player while avoiding the walls
             if (distanceToPlayer < AggroRange && distanceToPlayer > 1.0f && distanceToPlayer > stopRange)
             {
-                Debug.Log(distanceToPlayer);
                 transform.position = Vector2.MoveTowards(transform.position, (Vector2)transform.position + desiredDirection, speed * Time.deltaTime);
                 enemyAnimator.SetBool("isMoving", true);
                 enemyAnimator.SetBool("isAttacking", false);
@@ -93,7 +92,6 @@ public class FollowEnemy : MonoBehaviour
             {
                 // if (Time.time - lastAttackTime >= 0.1f)
                 // {
-                Debug.Log("STARTING ATTACK" + distanceToPlayer);
                 StartCoroutine(damagePlayer(damage));
                 //}
                 enemyAnimator.SetBool("isMoving", false);
