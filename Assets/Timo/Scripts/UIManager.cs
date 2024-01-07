@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
         //Health Controls
         if (health <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("DeathScene");
         }
         //Use a potion
         if (Input.GetKeyDown(KeyCode.Space) && potions >= 1 && health < 100) 
