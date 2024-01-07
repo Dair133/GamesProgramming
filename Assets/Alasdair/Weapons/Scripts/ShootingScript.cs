@@ -11,6 +11,7 @@ public class ShootingScript : MonoBehaviour
     private float nextFireTime = 0f;  // Time of the next shot
     private PlayerController playerController;
     private float originalMoveSpeed;
+    private int timeSpeed = 0;
     // Position relative to the gun where bullets are fired from
     public Vector3 bulletOffset = new Vector3(0, 1, 0);
 
@@ -32,15 +33,25 @@ public class ShootingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+        if(playerController.moveSpeed == 10)
+        {
+            timeSpeed++;
+            if(timeSpeed > 120)
+            {
+                playerController.moveSpeed = 35;
+            }
+        }
+
         if (Input.GetMouseButton(0))
         {
-            //Debug.Log("setting slow speed");
+            Debug.Log("setting slow speed");
             playerController.moveSpeed = 10;
           
         }
         else
         {
-           // Debug.Log("setting original speed");
+            Debug.Log("setting original speed");
             StartCoroutine(SetOriginaMoveSpeedt());
         }
 
