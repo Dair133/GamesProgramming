@@ -386,12 +386,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4eb124f94ddab948a3a816ce7687c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 7
   target: {fileID: 0}
-  AggroRange: 18.9
+  AggroRange: 25
   deathSound: {fileID: 3050547996208575273, guid: 716bbad8ef4008b4f922112b84df3ee1, type: 3}
-  stopRange: 1
+  stopRange: 4.4
   enemyAnimator: {fileID: 0}
+  health: 60
   damage: 2
   healthBar: {fileID: 0}
 --- !u!95 &1036354211507643060

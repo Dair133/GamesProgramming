@@ -203,7 +203,7 @@ MonoBehaviour:
   moveTowardRange: 25
   retreatRange: 20
   bulletPrefab: {fileID: 2305691322226886093, guid: 8fabd5fdb72bc1e4293182332b83e90d, type: 3}
-  bulletSpeed: 61
+  bulletSpeed: 52
   shootInterval: 3
   BulletSpawnLocationY: 0
   BulletSpawnLocationX: 0

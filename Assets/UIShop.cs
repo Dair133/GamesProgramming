@@ -41,13 +41,13 @@ public class UIShop : MonoBehaviour
                     failure.SetActive(false);
                     UIShopComponent.GetComponentInParent<UIManager>().addPotion();
                     player.GetComponent<PlayerScripts>().goldPickup(-10);
-                    Debug.Log("Success");
+                    //Debug.Log("Success");
                     success.SetActive(true);
                 }
                 else
                 {
                     success.SetActive(false);
-                    Debug.Log("Failure");
+                   // Debug.Log("Failure");
                     failure.SetActive(true);
                 }
             }

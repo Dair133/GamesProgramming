@@ -120,25 +120,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24c028f3138515429b2b8c51580e869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 5
   target: {fileID: 0}
-  AggroRange: 35
-  stopRange: 4
-  meleeDamage: 5
-  retreatSpeed: 5
-  followSpeed: 5
+  AggroRange: 60
+  stopRange: 2
+  meleeDamage: 0.5
+  retreatSpeed: 10
+  followSpeed: 10
   enemyAnimator: {fileID: 0}
   moveTowardRange: 29
   retreatRange: 20
   bulletPrefabOne: {fileID: 6954400887478989305, guid: 6ee38a207e9800b40a225ddc9638869f, type: 3}
   bulletPrefabTwo: {fileID: 2305691322226886093, guid: 8fabd5fdb72bc1e4293182332b83e90d, type: 3}
   bulletPrefabThree: {fileID: 9201988091475638347, guid: 6229ee956bce4d9448e4f61faa78eec8, type: 3}
-  bulletSpeed: 20
-  shootInterval: 3
+  bulletSpeed: 30
+  shootInterval: 1.5
   BulletSpawnLocationY: 0
   BulletSpawnLocationX: 0
   shootDelay: 0.21
   animationDelay: 1
+  health: 400
   healthBar: {fileID: 0}
 --- !u!61 &2336457127088369526
 BoxCollider2D:

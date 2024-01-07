@@ -40,7 +40,7 @@ public class itemMovememnt : MonoBehaviour
 
         previousClip = playerControllerScript.InitializeClip();
         clipName = headSprite.sprite.name;
-      
+        weaponObject.transform.localScale = new Vector3(0.65f, 0.65f, 1);
     }
 
 
@@ -129,7 +129,7 @@ public class itemMovememnt : MonoBehaviour
                 //we can put this here because weapon is NEVER flipped when character is facing left
                 weaponSprite.flipY = true;
 
-                weaponObject.transform.localScale = new Vector3(0.65f, 0.65f, 1);
+             
                 weaponObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
                 if (angle < 180)//very small adjustment to move wepon slightly to left so it looks ok

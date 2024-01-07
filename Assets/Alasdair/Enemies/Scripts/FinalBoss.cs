@@ -52,7 +52,7 @@ public class FinalBoss : MonoBehaviour
     private float shootingAnimationEndTime;
 
     //Health Variables
-    private float health;
+    public float health;
     [SerializeField]
     private FloatingHealthBar healthBar;
    
@@ -60,7 +60,7 @@ public class FinalBoss : MonoBehaviour
     void Start()
     {
         //Health Variables
-        health = 100;
+       
         healthBar = GetComponentInChildren<FloatingHealthBar>();
 
         if (enemyAnimator == null)//gets animator if not set publically
@@ -78,12 +78,14 @@ public class FinalBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(health > 50)
+        player = GameObject.FindGameObjectWithTag("PlayerTag");
+        //Debug.Log(health);
+        if(health > 200)
         {
             enemyAnimator.SetBool("phaseTwo", false);
             MoveAndShoot();
         }
-        else if(health <= 50)
+        else if(health <= 200)
         {
             enemyAnimator.SetBool("phaseTwo", true);
             FollowAttackTarget();
@@ -268,7 +270,7 @@ public class FinalBoss : MonoBehaviour
                 enemyAnimator.SetBool("isMoving", true);
                 enemyAnimator.SetBool("isAttacking", false);
             }
-            else
+            else if (distanceToPlayer < AggroRange)
             {
                 // if (Time.time - lastAttackTime >= 0.1f)
                 // {

@@ -172,7 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78885ee8662ba764c9558daafe38034d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletDamage: 3
+  bulletDamage: 7
+  bulletSoundClip: {fileID: 0}
 --- !u!1 &8589641626189112875
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,7 +42,7 @@ public class PlayerScripts : MonoBehaviour
             if (UI != null)
             {
                 audioSource.PlayOneShot(takeDamageSound);
-                Debug.Log("TAKING DAMAGE: " + playerHealth);
+                //Debug.Log("TAKING DAMAGE: " + playerHealth);
                 // Updates UI to reflect damage taken
 
                 manager.takeDamage(damage);
@@ -51,7 +51,7 @@ public class PlayerScripts : MonoBehaviour
             if (playerHealth <= 0)
             {
                 // Do something here upon player death possibly different to how we handle death in UIManager
-                SceneManager.LoadScene("DeathScene");
+                
             }
 
             StartCoroutine(BecomeInvulnerable());

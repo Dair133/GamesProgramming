@@ -38,13 +38,13 @@ public class ShootingScript : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            Debug.Log("setting slow speed");
+           // Debug.Log("setting slow speed");
             playerController.moveSpeed = 6;
           
         }
         else
         {
-            Debug.Log("setting original speed");
+           // Debug.Log("setting original speed");
             //StartCoroutine(SetOriginaMoveSpeedt());
             playerController.moveSpeed = 13;
         }

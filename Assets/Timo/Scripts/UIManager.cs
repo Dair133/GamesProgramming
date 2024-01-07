@@ -15,12 +15,14 @@ public class UIManager : MonoBehaviour
     
     //Gold variables
     public TextMeshProUGUI goldText;
-
+    private AudioSource audioSource;
+    public AudioClip potionSound;
     private void Start()
     {
         GameObject player;
         player = GameObject.FindGameObjectWithTag("PlayerTag");
         playerHealthScript = player.GetComponent<PlayerScripts>();
+        audioSource = player.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -28,12 +30,14 @@ public class UIManager : MonoBehaviour
         //Health Controls
         if (health <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            
+            SceneManager.LoadScene("DeathScene");
         }
         //Use a potion
         if (Input.GetKeyDown(KeyCode.Space) && potions >= 1 && health < 100) 
         {
             //updates the actual player class with correct health value
+            audioSource.PlayOneShot(potionSound);
             playerHealthScript.Heal(5);
 
             //reflects new health in UI for user
