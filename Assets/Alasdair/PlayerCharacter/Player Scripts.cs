@@ -67,11 +67,16 @@ public class PlayerScripts : MonoBehaviour
     {
         playerHealth += healingAmount;
     }
-    
+
     //Gold pickup function
     public void goldPickup(int amount)
     {
         coins += amount;
         manager.updateCoins(coins);
+    }
+
+    public int getCoins()
+    {
+        return coins;
     }
 }

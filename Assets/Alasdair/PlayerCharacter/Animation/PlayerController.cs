@@ -106,8 +106,8 @@ public class PlayerController : MonoBehaviour
 
                 //inside this variable stored the position of the player
                 var targetPos = transform.position;
-                targetPos.x += input.x / 10;
-                targetPos.y += input.y / 10;
+                targetPos.x += input.x;
+                targetPos.y += input.y;
 
                 Debug.Log(targetPos.ToString() + transform.position.x);
                 if (Vector3.Distance(transform.position, targetPos) > 2f)

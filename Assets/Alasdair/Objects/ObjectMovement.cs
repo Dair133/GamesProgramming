@@ -37,8 +37,7 @@ public class ObjectMovement : MonoBehaviour
         {
             objectSprite.sortingOrder = 3;
         }
-
-        Debug.Log("the clip choice is "+clipChoice);
+        
         if (clipChoice == 0)//left
         {
       
