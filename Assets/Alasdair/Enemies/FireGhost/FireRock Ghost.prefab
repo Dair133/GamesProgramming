@@ -219,8 +219,8 @@ MonoBehaviour:
   BulletSpawnLocationX: -3
   shootDelay: 0.7
   animationDelay: 0
+  shootingSound: {fileID: 8300000, guid: a080864fe87ecef489141c71b2fb5500, type: 3}
   deathSound: {fileID: 3050547996208575273, guid: 716bbad8ef4008b4f922112b84df3ee1, type: 3}
-  health: 90
   healthBar: {fileID: 0}
 --- !u!50 &8801718055857072237
 Rigidbody2D:

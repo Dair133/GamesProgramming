@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScripts : MonoBehaviour
 {
@@ -17,7 +18,6 @@ public class PlayerScripts : MonoBehaviour
     private UIManager manager;
     private AudioSource audioSource;
     public AudioClip takeDamageSound;
-    public AudioClip pickUpCoinSound;
     private int coins;
 
     // Start is called before the first frame update
@@ -51,6 +51,7 @@ public class PlayerScripts : MonoBehaviour
             if (playerHealth <= 0)
             {
                 // Do something here upon player death possibly different to how we handle death in UIManager
+                SceneManager.LoadScene("DeathScene");
             }
 
             StartCoroutine(BecomeInvulnerable());
@@ -72,7 +73,6 @@ public class PlayerScripts : MonoBehaviour
     //Gold pickup function
     public void goldPickup(int amount)
     {
-        audioSource.PlayOneShot(pickUpCoinSound);
         coins += amount;
         manager.updateCoins(coins);
     }

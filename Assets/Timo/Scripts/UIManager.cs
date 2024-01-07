@@ -5,9 +5,6 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     //Health variables
-    private AudioSource audioSource;
-    public AudioClip potionSound;
-
     public Image healthBar;
     public float health = 100f;
     private PlayerScripts playerHealthScript;
@@ -21,7 +18,6 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
         GameObject player;
         player = GameObject.FindGameObjectWithTag("PlayerTag");
         playerHealthScript = player.GetComponent<PlayerScripts>();
@@ -38,7 +34,6 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && potions >= 1 && health < 100) 
         {
             //updates the actual player class with correct health value
-            audioSource.PlayOneShot(potionSound);
             playerHealthScript.Heal(5);
 
             //reflects new health in UI for user

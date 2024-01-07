@@ -21,16 +21,16 @@ public class FollowEnemy : MonoBehaviour
 
 
 
-    public float health;
+    private float health;
     public float damage = 1;
     [SerializeField] FloatingHealthBar healthBar;
     
     private void Start()
     {
         //Health Variables
-        //health = 100;
+        health = 100;
         healthBar = GetComponentInChildren<FloatingHealthBar>();
-        //speed = 5;
+        speed = 5;
         if (enemyAnimator == null)
         {
             enemyAnimator = GetComponent<Animator>();

@@ -172,7 +172,7 @@ Animator:
   m_GameObject: {fileID: 608704766387923465}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c256f744f59da9d4fbdf30e9f462629d, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -203,14 +203,13 @@ MonoBehaviour:
   moveTowardRange: 25
   retreatRange: 20
   bulletPrefab: {fileID: 2305691322226886093, guid: 8fabd5fdb72bc1e4293182332b83e90d, type: 3}
-  bulletSpeed: 45
+  bulletSpeed: 61
   shootInterval: 3
   BulletSpawnLocationY: 0
   BulletSpawnLocationX: 0
   shootDelay: 0
   animationDelay: 0
   deathSound: {fileID: 3050547996208575273, guid: 716bbad8ef4008b4f922112b84df3ee1, type: 3}
-  health: 55
   healthBar: {fileID: 0}
 --- !u!1 &2234955111206290639
 GameObject:

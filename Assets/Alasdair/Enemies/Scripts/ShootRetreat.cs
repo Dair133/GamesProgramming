@@ -34,7 +34,7 @@ public class ShootRetreat : MonoBehaviour
     private float shootingAnimationEndTime;
 
     //Health Variables
-    public float health;
+    private float health;
     [SerializeField]
     private FloatingHealthBar healthBar;
 
@@ -43,8 +43,7 @@ public class ShootRetreat : MonoBehaviour
     {
     
         //Health Variables
-    
-    
+        health = 100;
         healthBar = GetComponentInChildren<FloatingHealthBar>();
         
         if (enemyAnimator == null)//gets animator if not set publically

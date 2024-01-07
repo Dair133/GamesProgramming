@@ -372,7 +372,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.18}
+  m_Size: {x: 0.15, y: 0.2}
   m_EdgeRadius: 0
 --- !u!114 &1872121139449684529
 MonoBehaviour:
@@ -386,13 +386,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4eb124f94ddab948a3a816ce7687c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 0
   target: {fileID: 0}
-  AggroRange: 20
+  AggroRange: 18.9
   deathSound: {fileID: 3050547996208575273, guid: 716bbad8ef4008b4f922112b84df3ee1, type: 3}
-  stopRange: 4
+  stopRange: 1
   enemyAnimator: {fileID: 0}
-  health: 60
   damage: 2
   healthBar: {fileID: 0}
 --- !u!95 &1036354211507643060

@@ -3,7 +3,25 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - LargeWeapon
+  - Nothing
+  - Head
+  - Object
+  - Melee
+  - PlayerTag
+  - Bullet
+  - Enemy
+  - InventoryUI
+  - FireBunny
+  - Goblin
+  - StormGhost
+  - FireGhost
+  - FinalBoss
+  - Merchant
+  - ShopUI
+  - Failure
+  - Success
   layers:
   - Default
   - TransparentFX
@@ -38,6 +56,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: ObjectWhenCharacterUp
+    uniqueID: 1167473459
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 1006319745
     locked: 0

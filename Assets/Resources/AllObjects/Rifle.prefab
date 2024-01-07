@@ -201,7 +201,7 @@ MonoBehaviour:
   player: {fileID: 0}
   bulletPrefab: {fileID: 7494852011005843467, guid: 38de8379b33e9e74985bfa11ffa32852, type: 3}
   bulletSpeed: 50
-  fireRate: 0.27
+  fireRate: 0.2
   bulletOffset: {x: 0, y: 1, z: 0}
   primaryShootingSound: {fileID: 8300000, guid: c4e5d370c95aaef4590827b19db7fb3c, type: 3}
   shootingVariationOne: {fileID: 8300000, guid: d0f603f9366af8c4a9a71be109e3b6f6, type: 3}

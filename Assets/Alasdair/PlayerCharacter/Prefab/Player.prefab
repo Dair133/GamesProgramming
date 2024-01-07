@@ -584,7 +584,6 @@ MonoBehaviour:
   playerHealth: -1
   invulnerabilityTime: 0.2
   takeDamageSound: {fileID: 8300000, guid: 905f056055cdd604ea411cd74ebe3d5f, type: 3}
-  pickUpCoinSound: {fileID: 8300000, guid: fcd270816efa5b64db77ce63879e05f7, type: 3}
 --- !u!70 &-7738973751515852886
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

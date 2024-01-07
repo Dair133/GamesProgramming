@@ -257,7 +257,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamage: 5
-  bulletSoundClip: {fileID: 8300000, guid: a080864fe87ecef489141c71b2fb5500, type: 3}
 --- !u!331 &-1712822249216263181
 SpriteMask:
   m_ObjectHideFlags: 0
